@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # khukiting
 
 A new Flutter project.
@@ -14,3 +15,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# KhuKi-FrontEnd
+Using Flutter..wow!
+>>>>>>> 4474ac3cc9abf7d54c852517c09e8c909b7b50e8
