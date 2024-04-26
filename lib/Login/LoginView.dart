@@ -39,7 +39,6 @@ class LoginView extends StatelessWidget {
               },
             ),
             )
-        
           ],
         ),
       ),
@@ -78,9 +77,6 @@ class LoginView extends StatelessWidget {
       
       if (response.statusCode == 200) {
         print("SIWA authorization success: $response");
-        print(response.body);
-         // Access Token 추출
-
         final decodeddata = LoginResponse.fromJson(jsonDecode(response.body));
         // Secure Storage에 저장
         final storage = FlutterSecureStorage();
