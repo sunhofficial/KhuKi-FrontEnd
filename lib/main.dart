@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khukiting/Login/LoginView.dart';
 import 'package:khukiting/ProfileSetting/SecondView.dart';
+import 'package:khukiting/ProfileSetting/ThirdView.dart';
 import 'package:khukiting/ProfileSetting/firstView.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Login",
-      home: SecondView(),
+      home: ThirdView(),
     );
   }
 }
