@@ -13,9 +13,9 @@ class _ThirdViewState extends State<ThirdView> {
   bool _isValidText = false;
   int _SelectCookie = 1;
   final List<String> _cookieList = [
-    "normalCookie.png",
-    "khuCookie.png",
-    "whiteCookie.png"
+    "normal.png",
+    "khu.png",
+    "white.png"
   ];
 
   @override
@@ -121,7 +121,7 @@ class _ThirdViewState extends State<ThirdView> {
                             child: Opacity(
                               opacity: _SelectCookie == 0 ? 1 : 0.7,
                               child: Image.asset(
-                                'assets/normalCookie.png',
+                                'assets/cookieType/normal.png',
                                 width: 120,
                                 height: 120,
                               ),
@@ -136,7 +136,7 @@ class _ThirdViewState extends State<ThirdView> {
                             child: Opacity(
                               opacity: _SelectCookie == 1 ? 1 : 0.7,
                               child: Image.asset(
-                                'assets/khuCookie.png',
+                                'assets/cookieType/khu.png',
                                 width: 120,
                                 height: 120,
                               ),
@@ -151,7 +151,7 @@ class _ThirdViewState extends State<ThirdView> {
                             child: Opacity(
                               opacity: _SelectCookie == 2 ? 1 : 0.7,
                               child: Image.asset(
-                                'assets/whiteCookie.png',
+                                'assets/cookieType/white.png',
                                 width: 120,
                                 height: 120,
                               ),
@@ -181,10 +181,7 @@ class _ThirdViewState extends State<ThirdView> {
                         style: TextStyle(color: Colors.white, fontSize: 24)),
                   ],
                 )),
-               
               ],) ,
-           
-          
           ),),
           ],
         ),
