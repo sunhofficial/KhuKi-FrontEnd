@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khukiting/Model/NameTag.dart';
@@ -115,93 +116,71 @@ class _CookieGridPageState extends State<CookieGridPage> {
     );
   }
 
-  Widget _buildAgeBox() {
-    return Container(
-      constraints: BoxConstraints(maxWidth: 116),
-      decoration: BoxDecoration(
-        color: Color(0xE5FA457E),
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        child: Row(
-          // mainAxisSize: MainAxisSize.mas,
-          children: [
-            Image.asset("assets/ageYoung.png",
-                width: 24, height: 24, fit: BoxFit.contain),
-            SizedBox(width: 4),
-            Text(
-              "19-21살",
-              style: TextStyle(fontSize: 16, color: Colors.white),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  
 
   _showCookieModal(BuildContext context, Cookie cookie) {
     showCupertinoModalPopup(
       context: context,
       builder: (context) {
-        return CupertinoPopupSurface(
-          child: Container(
-            color: CupertinoColors.white,
-            alignment: Alignment.center,
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.8,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 32,
-                ),
-                Image.asset(
-                  'assets/cookieType/${cookie.cookieType}.png',
-                  width: 200,
-                  height: 200,
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                _cookieInfoStack(cookie.info, NameTag.big),
-                SizedBox(
-                  height: 32,
-                ),
-                _InfoRow("나이", _buildAgeBox()),
-                SizedBox(
-                  height: 32,
-                ),
-                _InfoRow(
-                  "정문으로부터 거리",
-                  Text(
-                    "10분",
-                    style: TextStyle(fontSize: 16, color: Colors.black),
-                  ),
-                ),
-                SizedBox(
-                  height: 32,
-                ),
-                _InfoRow(
-                  "나의 맛집",
-                  Text(
-                    "수누리",
-                    style: TextStyle(fontSize: 16, color: Colors.black),
-                  ),
-                ),
-                Spacer(),
-                _buildButtonsContainer(),
-                Spacer()
-              ],
-            ),
+        return CookieDetailBottomModal(cookie);
+      },);}
+
+  _cookieItem(Cookie cookie, VoidCallback onTap, NameTag nameTag) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Image.asset(
+            'assets/cookieType/${cookie.cookieType}.png',
+            width: 100,
+            height: 100,
           ),
-        );
-      },
+          SizedBox(
+            height: 8,
+          ),
+        CookieInfoStack(cookie.info, nameTag),
+        ],
+      ),
     );
   }
 
-  _InfoRow(String label, Widget rightWidget) {
+
+}
+
+// Future<List<Cookie>> fetchCookiesFromServer(int count, int page) async {
+//   // Simulate network delay
+//   await Future.delayed(Duration(seconds: 2));
+//   // Simulate fetching from server by generating placeholder cookies
+//   return List.generate(count, (index) => Cookie(id: 'cookie_${page}_$index'));
+// }
+final class CookieInfoStack extends StatelessWidget {
+  String cookieInfo;
+  NameTag nameTagSize;
+  CookieInfoStack(this.cookieInfo, this.nameTagSize );
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Image.asset('assets/nameTag.png',
+            width: nameTagSize.tagWidth,
+            height: nameTagSize.tagHeight,
+            fit: BoxFit.contain),
+        Text(
+          cookieInfo,
+          style: TextStyle(fontSize: nameTagSize.sizeofFont, color: Colors.black),
+        ),
+      ],
+    );
+  
+}
+}
+
+class CookieDetailBottomModal extends StatelessWidget {
+  final Cookie cookie;
+  CookieDetailBottomModal(this.cookie);
+
+  Widget _InfoRow(BuildContext context, String label, Widget rightWidget) {
     return Row(
       children: [
         Expanded(
@@ -224,26 +203,31 @@ class _CookieGridPageState extends State<CookieGridPage> {
     );
   }
 
-  _cookieItem(Cookie cookie, VoidCallback onTap, NameTag nameTag) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Image.asset(
-            'assets/cookieType/${cookie.cookieType}.png',
-            width: 100,
-            height: 100,
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          _cookieInfoStack(cookie.info, nameTag),
-        ],
+  Widget _buildAgeBox(BuildContext context) {
+    return Container(
+      constraints: BoxConstraints(maxWidth: 116),
+      decoration: BoxDecoration(
+        color: Color(0xE5FA457E),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        child: Row(
+          children: [
+            Image.asset("assets/ageYoung.png",
+                width: 24, height: 24, fit: BoxFit.contain),
+            SizedBox(width: 4),
+            Text(
+              "19-21살",
+              style: TextStyle(fontSize: 16, color: Colors.white),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  _buildButtonsContainer() {
+  Widget _buildButtonsContainer(BuildContext context, Cookie cookie) {
     return Container(
       width: 160,
       height: 72,
@@ -293,6 +277,7 @@ class _CookieGridPageState extends State<CookieGridPage> {
                   ),
                 ),
               ),
+              // More buttons as previously defined
               Ink(
                 width: 52,
                 height: 52,
@@ -338,17 +323,83 @@ class _CookieGridPageState extends State<CookieGridPage> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    OutlinedButton(onPressed: () {Navigator.pop(context);}, style: OutlinedButton.styleFrom(
+                                    OutlinedButton(onPressed: () {Navigator.pop(context);
+                                    Navigator.pop(context);
+                                    }, style: OutlinedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                         
                                       ),
-                                      fixedSize: Size(104, 48)
+                                      fixedSize: Size(104, 48),
                                     ), child: Text("취소")),
                                     SizedBox(width: 24,),
                                     ElevatedButton(
                                       onPressed: () {
                                         Navigator.pop(context);
+                                        Navigator.pop(context);
+
+                                         showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return Dialog(
+                                              backgroundColor: Colors.white,
+                                              surfaceTintColor: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              child: Stack(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                            8, 32, 16, 32),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Image.asset(
+                                                            'assets/cookieType/${cookie.cookieType}.png',
+                                                            width: 140,
+                                                            height: 140),
+                                                        Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          children: [
+                                                            Text("연락수단"),
+                                                            SizedBox(height: 4),
+                                                            Text(
+                                                                "010-3348-9055"),
+                                                            SizedBox(height: 8),
+                                                            Text("이렇게 연락해죠"),
+                                                            SizedBox(height: 4),
+                                                            Text(
+                                                                "안녕 날 소개하지 내이름은"),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Positioned(
+                                                    right: 8,
+                                                    top: 8,
+                                                    child: IconButton(
+                                                      icon: Icon(
+                                                        CupertinoIcons.xmark,
+                                                        color: Colors.red,
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            );},);
                                       },
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
@@ -379,15 +430,40 @@ class _CookieGridPageState extends State<CookieGridPage> {
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPopupSurface(
+      // isSurfacePainted: true,
+      child: Container(
+        color: CupertinoColors.white,
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height * 0.8,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(height: 32),
+            Image.asset(
+              'assets/cookieType/${cookie.cookieType}.png',
+              width: 200,
+              height: 200,
+            ),
+            SizedBox(height: 16),
+            // Assumed existing method call
+          CookieInfoStack(cookie.info, NameTag.big),
+            SizedBox(height: 32),
+            _InfoRow(context, "나이", _buildAgeBox(context)),
+            SizedBox(height: 32),
+            _InfoRow(context, "정문으로부터 거리", Text("10분", style: TextStyle(fontSize: 16, color: Colors.black))),
+            SizedBox(height: 32),
+            _InfoRow(context, "나의 맛집", Text("수누리", style: TextStyle(fontSize: 16, color: Colors.black))),
+            Spacer(),
+            _buildButtonsContainer(context, cookie),
+            Spacer()
+          ],
+        ),
+      ),
+    );
+  }
 }
-
-// Future<List<Cookie>> fetchCookiesFromServer(int count, int page) async {
-//   // Simulate network delay
-//   await Future.delayed(Duration(seconds: 2));
-//   // Simulate fetching from server by generating placeholder cookies
-//   return List.generate(count, (index) => Cookie(id: 'cookie_${page}_$index'));
-// }
-
-
-
-
