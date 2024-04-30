@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khukiting/Components/CookieInfoStack.dart';
 import 'package:khukiting/MainPage/MainView.dart';
 import 'package:khukiting/Model/NameTag.dart';
 import 'package:khukiting/Model/Cookie.dart';
@@ -35,9 +36,9 @@ class PickedCookieStack extends StatelessWidget {
                 width: isHistory ? 128 : 140,
                 height: isHistory ? 128 : 140,
               ),
-              if (isHistory == true) 
+              if (isHistory == true)...[
                 SizedBox(height: 4,),
-                CookieInfoStack(cookie.info, NameTag.small),
+                CookieInfoStack(cookie.info, NameTag.small),]
               ],
               ),
               SizedBox(width: 8,),
