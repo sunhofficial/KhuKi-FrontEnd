@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:khukiting/Components/PickedCookieStack.dart';
 import 'package:khukiting/Model/NameTag.dart';
 import 'package:khukiting/Model/Cookie.dart';
+import 'package:khukiting/PickedCookies/PickedCookiesView.dart';
 // import 'package:khukiting/ProfileSetting/PickedCookies/pickedCookiesView.dart';
 // import P;
 
@@ -15,6 +16,10 @@ class MainView extends StatelessWidget {
         leading: IconButton(
           icon: Icon(CupertinoIcons.gift),
           onPressed: () {
+ Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PickedCookieListPage())
+            );
             // Handle back button press
           },
         ),
@@ -156,28 +161,7 @@ class _CookieGridPageState extends State<CookieGridPage> {
 //   // Simulate fetching from server by generating placeholder cookies
 //   return List.generate(count, (index) => Cookie(id: 'cookie_${page}_$index'));
 // }
-final class CookieInfoStack extends StatelessWidget {
-  String cookieInfo;
-  NameTag nameTagSize;
-  CookieInfoStack(this.cookieInfo, this.nameTagSize );
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Image.asset('assets/nameTag.png',
-            width: nameTagSize.tagWidth,
-            height: nameTagSize.tagHeight,
-            fit: BoxFit.contain),
-        Text(
-          cookieInfo,
-          style: TextStyle(fontSize: nameTagSize.sizeofFont, color: Colors.black),
-        ),
-      ],
-    );
-  
-}
-}
+
 
 class CookieDetailBottomModal extends StatelessWidget {
   final Cookie cookie;
