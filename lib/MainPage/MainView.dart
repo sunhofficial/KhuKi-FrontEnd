@@ -1,8 +1,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:khukiting/Components/PickedCookieStack.dart';
 import 'package:khukiting/Model/NameTag.dart';
 import 'package:khukiting/Model/Cookie.dart';
+// import 'package:khukiting/ProfileSetting/PickedCookies/pickedCookiesView.dart';
+// import P;
 
 class MainView extends StatelessWidget {
   @override
@@ -337,7 +340,6 @@ class CookieDetailBottomModal extends StatelessWidget {
                                       onPressed: () {
                                         Navigator.pop(context);
                                         Navigator.pop(context);
-
                                          showDialog(
                                           context: context,
                                           builder: (context) {
@@ -348,57 +350,7 @@ class CookieDetailBottomModal extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
-                                              child: Stack(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            8, 32, 16, 32),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: [
-                                                        Image.asset(
-                                                            'assets/cookieType/${cookie.cookieType}.png',
-                                                            width: 140,
-                                                            height: 140),
-                                                        Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            Text("연락수단"),
-                                                            SizedBox(height: 4),
-                                                            Text(
-                                                                "010-3348-9055"),
-                                                            SizedBox(height: 8),
-                                                            Text("이렇게 연락해죠"),
-                                                            SizedBox(height: 4),
-                                                            Text(
-                                                                "안녕 날 소개하지 내이름은"),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    right: 8,
-                                                    top: 8,
-                                                    child: IconButton(
-                                                      icon: Icon(
-                                                        CupertinoIcons.xmark,
-                                                        color: Colors.red,
-                                                      ),
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
+                                              child: PickedCookieStack(cookie:  cookie, isHistory:  false)
                                             );},);
                                       },
                                       style: ElevatedButton.styleFrom(
