@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:ffi';
-// import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/config/configuartions.dart';
-// import 'package:khukiting/src/domain/Model/User.dart';
 import 'package:khukiting/src/domain/repository/LoginRepository.dart';
+import 'package:khukiting/src/presentation/views/Login/LoginViewModel.dart';
+import 'package:khukiting/src/presentation/views/MainPage/MainView.dart';
+import 'package:khukiting/src/presentation/views/ProfileSetting/firstView.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'dart:async';
 import 'package:crypto/crypto.dart';
@@ -15,6 +15,11 @@ import 'package:khukiting/src/domain/Model/response/LoginResponse.dart';
 
 class LoginView extends StatelessWidget {
   final LoginRepository loginRepository = getIt<LoginRepository>();
+  final LoginViewModel _loginViewModel;
+  LoginView({Key? key})
+      : _loginViewModel = LoginViewModel(getIt<LoginRepository>(), const FlutterSecureStorage()),
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,39 +65,22 @@ class LoginView extends StatelessWidget {
         ],
         nonce: nonce,
       );
-      print(credential.authorizationCode);
-      loginRepository.postLogin(credential.identityToken!);
+      final message = await _loginViewModel.signInwithApple(credential.identityToken!);
+      if (message == "회원가입성공") {
+         Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FirstView())
+            );
+
+      } else if (message == "로그인성공") {
+     Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MainView())
+            );
+      }
       // await _authorizeUsingSiwa(identityToken: credential.identityToken, email: credential.email);
     } catch (error) {
       print("Apple login 실패: $error");
-    }
-  }
-
-  Future<void> _authorizeUsingSiwa({required String? identityToken, required String? email}) async {
-    try {
-      if (identityToken == null) {
-        throw Exception("IdentityToken is missing");
-      }
-      final response = await http.post(
-        Uri.parse("https://9709-125-130-123-109.ngrok-free.app/api/auth/siwa"), // 여기에 서버의 URL을 입력하세요
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode({'appleIdentityToken': identityToken}),
-      );
-      
-      if (response.statusCode == 200) {
-        print("SIWA authorization success: $response");
-        final decodeddata = LoginResponse.fromJson(jsonDecode(response.body));
-        // Secure Storage에 저장
-        final storage = FlutterSecureStorage();
-        await storage.write(key: 'accessToken', value: decodeddata.accessToken);
-        print(decodeddata.accessToken);
-        print(decodeddata.email);
-        print(decodeddata.id);
-      } else {
-        throw Exception("Failed to authorize with SIWA ${response.statusCode}");
-      }
-    } catch (error) {
-      print("Failed to authorize with SIWA: $error");
     }
   }
 }
