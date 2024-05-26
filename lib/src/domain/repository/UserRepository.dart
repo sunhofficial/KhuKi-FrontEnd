@@ -1,5 +1,6 @@
 import 'package:khukiting/src/config/configuartions.dart';
 import 'package:khukiting/src/data/DTO/requests/FirstProfileRequest.dart';
+import 'package:khukiting/src/data/DTO/requests/PostMyCookieRequest.dart';
 import 'package:khukiting/src/data/DTO/response/GeneralResponse.dart';
 // import 'package:khukiting/src/domain/Model/User.dart';
 import 'package:khukiting/src/data/DTO/response/LoginResponse.dart';
@@ -20,5 +21,9 @@ class UserRepository {
   }
   Future<GeneralResponse<void>> putSecondProfile(String openId, String restaruant, String selfInfo) async {
     return await _remoteServices.putSecondProfile(SecondProfileRequest(openId: openId, restaruant: restaruant, selfInfo: selfInfo) );
+  }
+
+  Future<GeneralResponse<void>> postMyCookie(String info, int type) async {
+    return await _remoteServices.postMyCookie(PostMyCookieRequest(info: info, type: type));
   }
 }

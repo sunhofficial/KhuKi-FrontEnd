@@ -1,4 +1,4 @@
-  class FirstProfileRequest {
+class FirstProfileRequest {
     String gender;
     int age;
     int distance;

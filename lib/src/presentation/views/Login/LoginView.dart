@@ -6,8 +6,9 @@ import 'package:khukiting/src/data/datasources/local/AccessTokenProvider.dart';
 import 'package:khukiting/src/domain/repository/UserRepository.dart';
 import 'package:khukiting/src/presentation/views/Login/LoginViewModel.dart';
 import 'package:khukiting/src/presentation/views/MainPage/MainView.dart';
-import 'package:khukiting/src/presentation/views/ProfileSetting/SecondView.dart';
-import 'package:khukiting/src/presentation/views/ProfileSetting/firstView.dart';
+import 'package:khukiting/src/presentation/views/ProfileSetting/First/FirstView.dart';
+import 'package:khukiting/src/presentation/views/ProfileSetting/Second/SecondView.dart';
+import 'package:khukiting/src/presentation/views/ProfileSetting/ThirdView.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'dart:async';
 import 'package:crypto/crypto.dart';
@@ -76,7 +77,13 @@ class LoginView extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => SecondView())
             );
-      }
+      } 
+      else if (message == "쿠키생성") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ThirdView())
+            );
+      } 
       else if (message == "로그인성공") {
      Navigator.push(
               context,

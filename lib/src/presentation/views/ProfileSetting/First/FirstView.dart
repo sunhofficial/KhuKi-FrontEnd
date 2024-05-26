@@ -2,11 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/config/configuartions.dart';
 import 'package:khukiting/src/domain/repository/UserRepository.dart';
-import 'StepProgressBar.dart';
+import 'package:khukiting/src/presentation/views/ProfileSetting/Second/SecondView.dart';
+import '../StepProgressBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'FirstViewModel.dart';
-import 'SecondView.dart';
+
 class FirstView extends StatelessWidget {
   FirstView({Key? key}) : super(key: key);
   //  FirstView({Key? key})

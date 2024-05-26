@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:khukiting/src/data/DTO/requests/FirstProfileRequest.dart';
+import 'package:khukiting/src/data/DTO/requests/PostMyCookieRequest.dart';
 import 'package:khukiting/src/data/DTO/response/GeneralResponse.dart';
 import 'package:khukiting/src/data/DTO/response/LoginResponse.dart';
 import 'package:khukiting/src/data/datasources/local/AccessTokenProvider.dart';
@@ -73,6 +74,20 @@ class RemoteServerDatasources {
       throw e;
 
     }
+  }
 
+  Future<GeneralResponse<void>> postMyCookie(PostMyCookieRequest cookie) async {
+       try {
+      final response = await _dio.post(apiEndPoint.baseUrl + apiEndPoint.user + "/myCookie", data: cookie.toJson());
+      if ( response.statusCode == 200 ){
+        return GeneralResponse<void>.fromJson(response.data, (json) => null);
+      } else {
+        throw Exception("Failed to put second profile ${response.statusCode}");  
+      }
+    } catch(e) {
+      print("죄송합니다, 오류가 발생했습니다: $e");
+      throw e;
+
+    }
   }
 }

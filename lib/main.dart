@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/config/configuartions.dart';
 // import 'package:khukiting/Login/LoginView.dart';
-import 'package:khukiting/src/presentation/views/MainPage/MainView.dart';
-import 'package:khukiting/src/presentation/views/ProfileSetting/SecondView.dart';
-import 'package:khukiting/src/presentation/views/ProfileSetting/ThirdView.dart';
-import 'package:khukiting/src/presentation/views/ProfileSetting/firstView.dart';
 import 'package:dio/dio.dart';
 import './src/presentation/views/Login/LoginView.dart';
 import 'package:get_it/get_it.dart';

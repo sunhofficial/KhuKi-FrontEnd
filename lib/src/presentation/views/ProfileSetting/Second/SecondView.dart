@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/presentation/views/MainPage/MainView.dart';
-import 'StepProgressBar.dart';
+import 'package:khukiting/src/presentation/views/ProfileSetting/ThirdView.dart';
+import '../StepProgressBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:khukiting/src/config/configuartions.dart';
@@ -69,7 +70,7 @@ class SecondView extends StatelessWidget {
                         if (isSuccess) {
                           Navigator.push(
                       context,
-              MaterialPageRoute(builder: (context) => MainView()),
+                   MaterialPageRoute(builder: (context) => ThirdView()),
             );
                         }
                       } : null,
