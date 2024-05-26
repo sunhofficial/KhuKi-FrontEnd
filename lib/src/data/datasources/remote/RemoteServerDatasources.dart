@@ -1,16 +1,20 @@
 import 'package:dio/dio.dart';
+import 'package:khukiting/src/data/DTO/requests/FirstProfileRequest.dart';
+import 'package:khukiting/src/data/DTO/response/GeneralResponse.dart';
+import 'package:khukiting/src/data/DTO/response/LoginResponse.dart';
+import 'package:khukiting/src/data/datasources/local/AccessTokenProvider.dart';
 import 'package:khukiting/src/data/datasources/remote/apiEndPoint.dart';
-import '../../../domain/Model/response/LoginResponse.dart';
-import '../../../domain/Model/response/GeneralResponse.dart';
-
 class RemoteServerDatasources {
   final Dio _dio;
-  
-  // RemoteServerDatasources({required Dio dio}) : _dio = dio ;
-    RemoteServerDatasources({required Dio dio}) : _dio = dio {
+ final AccessTokenProvider _accessTokenProvider;
+    RemoteServerDatasources({required Dio dio, required AccessTokenProvider accessTokenProvider}) : _dio = dio, _accessTokenProvider = accessTokenProvider {
     _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) {
-        print("REQUEST[${options.method}] => PATH: ${options.path} => DATA: ${options.data}");
+      onRequest: (options, handler) async {
+     final accessToken = await _accessTokenProvider.accessToken;
+        if (accessToken != null && options.path != apiEndPoint.auth) {
+          options.headers['Authorization'] = 'Bearer $accessToken';
+        }
+       
         return handler.next(options); // continue
       },
       onResponse: (response, handler) {
@@ -39,5 +43,20 @@ class RemoteServerDatasources {
       print("죄송합니다, 오류가 발생했습니다: $e");
       throw e;
     }
+  }
+  Future<GeneralResponse<void>> putFirstProfile(FirstProfileRequest profile) async {
+    try {
+      final response = await _dio.put(apiEndPoint.baseUrl + apiEndPoint.user + "/profile/first", data: profile.toJson());
+      if ( response.statusCode == 200 ){
+        return GeneralResponse<void>.fromJson(response.data, (json) => null);
+      } else {
+        throw Exception("Failed to put first profile ${response.statusCode}");  
+      }
+    } catch(e) {
+      print("죄송합니다, 오류가 발생했습니다: $e");
+      throw e;
+
+    }
+
   }
 }

@@ -8,9 +8,10 @@ import 'package:khukiting/src/presentation/views/ProfileSetting/firstView.dart';
 import 'package:dio/dio.dart';
 import './src/presentation/views/Login/LoginView.dart';
 import 'package:get_it/get_it.dart';
-void main() {
+Future<void> main() async {
 // final Dio dio = Dio();
-  configureDependencies();
+ WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
   
   runApp(const MyApp());
 }

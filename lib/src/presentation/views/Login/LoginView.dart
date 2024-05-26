@@ -2,22 +2,21 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/config/configuartions.dart';
-import 'package:khukiting/src/domain/repository/LoginRepository.dart';
+import 'package:khukiting/src/data/datasources/local/AccessTokenProvider.dart';
+import 'package:khukiting/src/domain/repository/UserRepository.dart';
 import 'package:khukiting/src/presentation/views/Login/LoginViewModel.dart';
 import 'package:khukiting/src/presentation/views/MainPage/MainView.dart';
+import 'package:khukiting/src/presentation/views/ProfileSetting/SecondView.dart';
 import 'package:khukiting/src/presentation/views/ProfileSetting/firstView.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'dart:async';
 import 'package:crypto/crypto.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:khukiting/src/domain/Model/response/LoginResponse.dart';
 
 class LoginView extends StatelessWidget {
-  final LoginRepository loginRepository = getIt<LoginRepository>();
+  final UserRepository loginRepository = getIt<UserRepository>();
   final LoginViewModel _loginViewModel;
   LoginView({Key? key})
-      : _loginViewModel = LoginViewModel(getIt<LoginRepository>(), const FlutterSecureStorage()),
+      : _loginViewModel = LoginViewModel(getIt<UserRepository>(), getIt<AccessTokenProvider>()),
         super(key: key);
 
   @override
@@ -66,19 +65,24 @@ class LoginView extends StatelessWidget {
         nonce: nonce,
       );
       final message = await _loginViewModel.signInwithApple(credential.identityToken!);
-      if (message == "회원가입성공") {
+      if (message == "회원가입성공" || message == "첫번째프로필") {
          Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => FirstView())
             );
 
-      } else if (message == "로그인성공") {
+      } else if (message == "두번째프로필") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SecondView())
+            );
+      }
+      else if (message == "로그인성공") {
      Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => MainView())
             );
       }
-      // await _authorizeUsingSiwa(identityToken: credential.identityToken, email: credential.email);
     } catch (error) {
       print("Apple login 실패: $error");
     }

@@ -1,20 +1,33 @@
 import 'package:get_it/get_it.dart';
-import 'package:khukiting/src/domain/repository/LoginRepository.dart';
+import 'package:khukiting/src/data/datasources/local/AccessTokenProvider.dart';
+import 'package:khukiting/src/domain/repository/UserRepository.dart';
 import 'package:injectable/injectable.dart';
 import 'configuartions.config.dart';
 import '../data/datasources/remote/RemoteServerDatasources.dart'; 
 import 'package:dio/dio.dart';
 import '../data/services/LoggingIntercepter.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final getIt = GetIt.instance;
-final Dio dio = Dio();
 
 @injectableInit
-void configureDependencies() {
+Future<void> configureDependencies() async {
+  final Dio dio = Dio();
+  final storage = FlutterSecureStorage();
   dio.interceptors.add(LoggingInterceptor());  
-  getIt.registerLazySingleton<LoginRepository>(() => LoginRepository());
-  getIt.registerLazySingleton<RemoteServerDatasources>(() => RemoteServerDatasources(dio: dio)); // 만약 Dio의 인스턴스가 필요하다면 적절한 인스턴스를 전달해주세요.
-// 다른 의존성도 필요한 경우 여기에 추가해주세요.
+
+  getIt.registerSingleton<Dio>(dio);
+  getIt.registerSingleton<FlutterSecureStorage>(storage);
   
-  // GetIt 초기화
+  getIt.registerLazySingleton<UserRepository>(() => UserRepository());
+  
+  final accessTokenProvider = AccessTokenProvider(storage);
+  getIt.registerSingleton<AccessTokenProvider>(accessTokenProvider);
+  
+  getIt.registerLazySingleton<RemoteServerDatasources>(() => RemoteServerDatasources(
+    dio: getIt<Dio>(),
+    accessTokenProvider: getIt<AccessTokenProvider>(),
+  ));
+
+  // Initialize GetIt
   getIt.init();
 }
