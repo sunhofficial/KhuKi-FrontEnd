@@ -2,12 +2,14 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
+import 'package:khukiting/src/presentation/views/Model/AgeGroup.dart';
 import 'package:khukiting/src/presentation/widgets/CookieInfoStack.dart';
 import 'package:khukiting/src/domain/Model/Cookie.dart';
 import 'package:khukiting/src/domain/Model/nameTag.dart';
 import 'package:khukiting/src/presentation/widgets/PickedCookieStack.dart';
 class CookieDetailBottomModal extends StatelessWidget {
-  final Cookie cookie;
+  final CookiesResponse cookie;
   CookieDetailBottomModal(this.cookie);
 
   Widget _InfoRow(BuildContext context, String label, Widget rightWidget) {
@@ -44,11 +46,11 @@ class CookieDetailBottomModal extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
         child: Row(
           children: [
-            Image.asset("assets/ageYoung.png",
+            Image.asset(AgeGroup.fromAge(cookie.age).assetPath,
                 width: 24, height: 24, fit: BoxFit.contain),
             SizedBox(width: 4),
             Text(
-              "19-21살",
+              AgeGroup.fromAge(cookie.age).description,
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           ],
@@ -57,7 +59,7 @@ class CookieDetailBottomModal extends StatelessWidget {
     );
   }
 
-  Widget _buildButtonsContainer(BuildContext context, Cookie cookie) {
+  Widget _buildButtonsContainer(BuildContext context, CookiesResponse cookie) {
     return Container(
       width: 160,
       height: 72,
@@ -177,7 +179,7 @@ class CookieDetailBottomModal extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
-                                              child: PickedCookieStack(cookie:  cookie, isHistory:  false)
+                                              // child: PickedCookieStack(cookie:  cookie, isHistory:  false)
                                             );},);
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -234,9 +236,9 @@ class CookieDetailBottomModal extends StatelessWidget {
             SizedBox(height: 32),
             _InfoRow(context, "나이", _buildAgeBox(context)),
             SizedBox(height: 32),
-            _InfoRow(context, "정문으로부터 거리", Text("10분", style: TextStyle(fontSize: 16, color: Colors.black))),
+            _InfoRow(context, "정문으로부터 거리", Text("${cookie.distance}분", style: TextStyle(fontSize: 16, color: Colors.black))),
             SizedBox(height: 32),
-            _InfoRow(context, "나의 맛집", Text("수누리", style: TextStyle(fontSize: 16, color: Colors.black))),
+            _InfoRow(context, "나의 맛집", Text("${cookie.restaurant}", style: TextStyle(fontSize: 16, color: Colors.black))),
             Spacer(),
             _buildButtonsContainer(context, cookie),
             Spacer()

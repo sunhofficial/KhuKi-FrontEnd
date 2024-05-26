@@ -1,11 +1,12 @@
 import 'package:khukiting/src/config/configuartions.dart';
 import 'package:khukiting/src/data/DTO/requests/FirstProfileRequest.dart';
 import 'package:khukiting/src/data/DTO/requests/PostMyCookieRequest.dart';
+import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
 import 'package:khukiting/src/data/DTO/response/GeneralResponse.dart';
 // import 'package:khukiting/src/domain/Model/User.dart';
 import 'package:khukiting/src/data/DTO/response/LoginResponse.dart';
 import '../../data/datasources/remote/RemoteServerDatasources.dart';
-import 'package:injectable/injectable.dart';
+
 
 class UserRepository {
   final RemoteServerDatasources _remoteServices;
@@ -25,5 +26,8 @@ class UserRepository {
 
   Future<GeneralResponse<void>> postMyCookie(String info, int type) async {
     return await _remoteServices.postMyCookie(PostMyCookieRequest(info: info, type: type));
+  }
+  Future<GeneralResponse<GetCookiesResponse>> getAllCookies(int page) async {
+    return await _remoteServices.getAllCookies(page);
   }
 }

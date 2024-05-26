@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:khukiting/src/data/DTO/requests/FirstProfileRequest.dart';
 import 'package:khukiting/src/data/DTO/requests/PostMyCookieRequest.dart';
+import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
 import 'package:khukiting/src/data/DTO/response/GeneralResponse.dart';
 import 'package:khukiting/src/data/DTO/response/LoginResponse.dart';
 import 'package:khukiting/src/data/datasources/local/AccessTokenProvider.dart';
@@ -83,6 +84,21 @@ class RemoteServerDatasources {
         return GeneralResponse<void>.fromJson(response.data, (json) => null);
       } else {
         throw Exception("Failed to put second profile ${response.statusCode}");  
+      }
+    } catch(e) {
+      print("죄송합니다, 오류가 발생했습니다: $e");
+      throw e;
+
+    }
+  }
+
+  Future<GeneralResponse<GetCookiesResponse>> getAllCookies(int page) async {
+    try {
+      final response = await _dio.get(apiEndPoint.baseUrl + apiEndPoint.cookie + "?page=$page");
+      if ( response.statusCode == 200 ){
+        return GeneralResponse<GetCookiesResponse>.fromJson(response.data, (json) => GetCookiesResponse.fromJson((json as Map<String, dynamic>?) ?? {}));
+      } else {
+        throw Exception("Failed to get all cookies ${response.statusCode}");  
       }
     } catch(e) {
       print("죄송합니다, 오류가 발생했습니다: $e");
