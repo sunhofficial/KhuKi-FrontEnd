@@ -18,4 +18,7 @@ class UserRepository {
   Future<GeneralResponse<void>> putFirstProfile(String gender, int age, int distance) async {
     return await _remoteServices.putFirstProfile(FirstProfileRequest(gender: gender, age: age, distance: distance));
   }
+  Future<GeneralResponse<void>> putSecondProfile(String openId, String restaruant, String selfInfo) async {
+    return await _remoteServices.putSecondProfile(SecondProfileRequest(openId: openId, restaruant: restaruant, selfInfo: selfInfo) );
+  }
 }

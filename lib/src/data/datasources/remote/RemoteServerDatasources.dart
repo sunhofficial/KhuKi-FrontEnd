@@ -59,4 +59,20 @@ class RemoteServerDatasources {
     }
 
   }
+
+  Future<GeneralResponse<void>> putSecondProfile(SecondProfileRequest profile) async {
+    try {
+      final response = await _dio.put(apiEndPoint.baseUrl + apiEndPoint.user + "/profile/second", data: profile.toJson());
+      if ( response.statusCode == 200 ){
+        return GeneralResponse<void>.fromJson(response.data, (json) => null);
+      } else {
+        throw Exception("Failed to put second profile ${response.statusCode}");  
+      }
+    } catch(e) {
+      print("죄송합니다, 오류가 발생했습니다: $e");
+      throw e;
+
+    }
+
+  }
 }
