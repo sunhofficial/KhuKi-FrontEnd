@@ -29,8 +29,10 @@ class MainView extends StatelessWidget {
           leading: IconButton(
             icon: Icon(CupertinoIcons.gift),
             onPressed: () {
-              // Navigator.push(
-              //     context, MaterialPageRoute(builder: (context) => PickedCookieListPage()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PickedCookieListPage()),
+              );
             },
           ),
           actions: [

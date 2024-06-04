@@ -33,7 +33,7 @@ class PickedCookieStack extends StatelessWidget {
             children: [
               Column(children: [
               Image.asset(
-                'assets/cookieType/${isHistory ? cookie?.type : cookieType}.png',
+                'assets/cookieType/${isHistory ? cookie?.cookieType : cookieType}.png',
                 width: isHistory ? 128 : 140,
                 height: isHistory ? 128 : 140,
               ),

@@ -5,6 +5,7 @@ import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
 import 'package:khukiting/src/data/DTO/response/GeneralResponse.dart';
 // import 'package:khukiting/src/domain/Model/User.dart';
 import 'package:khukiting/src/data/DTO/response/LoginResponse.dart';
+import 'package:khukiting/src/domain/Model/Cookie.dart';
 import '../../data/datasources/remote/RemoteServerDatasources.dart';
 import 'package:khukiting/src/data/DTO/response/PickCookieResponse.dart';
 
@@ -32,5 +33,16 @@ class UserRepository {
   }
   Future<GeneralResponse<PickCookieResponse>> pickCookie(String cookieId) async {
     return await _remoteServices.pickCookie(cookieId);
+  }
+  Future<List<Cookie>> getMyCookie() async {
+    return await _remoteServices.getPickedCookies();
+  }
+  Future<bool> postLogout() async {
+    final response =  await _remoteServices.postLogout();
+    return response.status == 200 ? true : false;
+  }
+  Future<bool> deleteUser() async {
+      final response = await _remoteServices.deleteUser();
+      return response.status == 200 ? true : false;
   }
 }

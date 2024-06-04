@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dio/dio.dart';
 import 'package:khukiting/src/data/DTO/requests/FirstProfileRequest.dart';
 import 'package:khukiting/src/data/DTO/requests/PostMyCookieRequest.dart';
@@ -5,8 +7,10 @@ import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
 import 'package:khukiting/src/data/DTO/response/GeneralResponse.dart';
 import 'package:khukiting/src/data/DTO/response/LoginResponse.dart';
 import 'package:khukiting/src/data/DTO/response/PickCookieResponse.dart';
+import 'package:khukiting/src/data/DTO/response/PickedCookieResponse.dart';
 import 'package:khukiting/src/data/datasources/local/AccessTokenProvider.dart';
 import 'package:khukiting/src/data/datasources/remote/apiEndPoint.dart';
+import 'package:khukiting/src/domain/Model/Cookie.dart';
 class RemoteServerDatasources {
   final Dio _dio;
  final AccessTokenProvider _accessTokenProvider;
@@ -107,6 +111,25 @@ class RemoteServerDatasources {
 
     }
   }
+  Future<List<Cookie>> getPickedCookies() async {
+    try {
+      final response = await _dio.get(apiEndPoint.baseUrl + apiEndPoint.user + "/cookie/picked");
+      if ( response.statusCode == 200 ){
+        List<dynamic> responseData = response.data['data'];
+         List<Cookie> cookies = responseData.map((json) => PickedCookieDetail.fromJson(json).toCookie()).toList();
+        //  GeneralResponse<PickedCookieResponse> generalResponse = GeneralResponse<PickedCookieResponse>.fromJson(response.data, (json) => PickedCookieResponse.fromJson((json as Map<String, dynamic>?) ?? {}));
+        //   List<Cookie> cookies = generalResponse.data!.cookies.map((detail) => detail.toCookie()).toList();
+          return cookies;
+
+      } else {
+        throw Exception("Failed to get picked cookies ${response.statusCode}");  
+      }
+    } catch(e) {
+      print("선호야, 오류발생했다 고쳐라: $e");
+      throw e;
+    }
+
+  }
   Future<GeneralResponse<PickCookieResponse>> pickCookie(String cookieId) async {
     try {
       final response = await _dio.post(apiEndPoint.baseUrl + apiEndPoint.cookie + "/pick", data: {
@@ -121,6 +144,33 @@ class RemoteServerDatasources {
       print("죄송합니다, 오류가 발생했습니다: $e");
       throw e;
 
+    }
+  }
+  Future<GeneralResponse<void>> postLogout() async {
+    try {
+      final response = await _dio.post(apiEndPoint.user + "/logout");
+      if ( response.statusCode == 200 ){
+        return GeneralResponse<void>.fromJson(response.data, (json) => null);
+      } else {
+        throw Exception("Failed to logout ${response.statusCode}");  
+      }
+    } catch(e) {
+      print("죄송합니다, 오류가 발생했습니다: $e");
+      throw e;
+
+    }
+  }
+  Future<GeneralResponse<void>> deleteUser() async {
+    try {
+      final response = await _dio.delete(apiEndPoint.user + "/delete");
+      if (response.statusCode == 200) {
+        return GeneralResponse<void>.fromJson(response.data, (json) => null);
+      } else {
+        throw Exception("Failed to delete user ${response.statusCode}");
+      }
+    } catch (e) {
+      print("죄송합니다, 오류가 발생했습니다: $e");
+      throw e;
     }
   }
 }

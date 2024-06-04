@@ -16,4 +16,15 @@ class Cookie {
     required this.selfInfo,
     required this.openID,
   });
+    String get cookieType {
+    switch (type) {
+      case 0:
+        return 'white';
+      case 1:
+        return 'khu';
+      default:
+        return 'normal';
+
+    
+  }}
 }
