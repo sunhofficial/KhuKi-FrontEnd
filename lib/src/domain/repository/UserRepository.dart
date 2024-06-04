@@ -6,7 +6,7 @@ import 'package:khukiting/src/data/DTO/response/GeneralResponse.dart';
 // import 'package:khukiting/src/domain/Model/User.dart';
 import 'package:khukiting/src/data/DTO/response/LoginResponse.dart';
 import '../../data/datasources/remote/RemoteServerDatasources.dart';
-
+import 'package:khukiting/src/data/DTO/response/PickCookieResponse.dart';
 
 class UserRepository {
   final RemoteServerDatasources _remoteServices;
@@ -29,5 +29,8 @@ class UserRepository {
   }
   Future<GeneralResponse<GetCookiesResponse>> getAllCookies(int page) async {
     return await _remoteServices.getAllCookies(page);
+  }
+  Future<GeneralResponse<PickCookieResponse>> pickCookie(String cookieId) async {
+    return await _remoteServices.pickCookie(cookieId);
   }
 }

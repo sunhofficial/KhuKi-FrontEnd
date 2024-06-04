@@ -4,6 +4,7 @@ import 'package:khukiting/src/data/DTO/requests/PostMyCookieRequest.dart';
 import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
 import 'package:khukiting/src/data/DTO/response/GeneralResponse.dart';
 import 'package:khukiting/src/data/DTO/response/LoginResponse.dart';
+import 'package:khukiting/src/data/DTO/response/PickCookieResponse.dart';
 import 'package:khukiting/src/data/datasources/local/AccessTokenProvider.dart';
 import 'package:khukiting/src/data/datasources/remote/apiEndPoint.dart';
 class RemoteServerDatasources {
@@ -99,6 +100,22 @@ class RemoteServerDatasources {
         return GeneralResponse<GetCookiesResponse>.fromJson(response.data, (json) => GetCookiesResponse.fromJson((json as Map<String, dynamic>?) ?? {}));
       } else {
         throw Exception("Failed to get all cookies ${response.statusCode}");  
+      }
+    } catch(e) {
+      print("죄송합니다, 오류가 발생했습니다: $e");
+      throw e;
+
+    }
+  }
+  Future<GeneralResponse<PickCookieResponse>> pickCookie(String cookieId) async {
+    try {
+      final response = await _dio.post(apiEndPoint.baseUrl + apiEndPoint.cookie + "/pick", data: {
+        "id": cookieId
+      });
+      if ( response.statusCode == 200 ){
+        return GeneralResponse<PickCookieResponse>.fromJson(response.data, (json) => PickCookieResponse.fromJson((json as Map<String, dynamic>?) ?? {}));
+      } else {
+        throw Exception("Failed to pick cookie ${response.statusCode}");  
       }
     } catch(e) {
       print("죄송합니다, 오류가 발생했습니다: $e");

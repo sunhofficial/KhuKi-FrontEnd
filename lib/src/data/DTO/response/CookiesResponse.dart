@@ -4,13 +4,14 @@ class CookiesResponse {
   final int type;
   final String info;
   final int distance;
-
+  final String cookieId;
   CookiesResponse({
     required this.age,
     required this.restaurant,
     required this.type,
     required this.info,
     required this.distance,
+    required this.cookieId
   });
   factory CookiesResponse.fromJson(Map<String, dynamic> json) {
     return CookiesResponse(
@@ -19,6 +20,7 @@ class CookiesResponse {
       type: json['type'],
       info: json['info'],
       distance: json['distance'],
+      cookieId: json['cookieId'],
     );
   }
   String get cookieType {

@@ -1,16 +1,19 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
-import 'package:khukiting/src/presentation/views/Model/AgeGroup.dart';
+import 'package:khukiting/src/domain/Model/AgeGroup.dart';
 import 'package:khukiting/src/presentation/widgets/CookieInfoStack.dart';
 import 'package:khukiting/src/domain/Model/Cookie.dart';
 import 'package:khukiting/src/domain/Model/nameTag.dart';
 import 'package:khukiting/src/presentation/widgets/PickedCookieStack.dart';
 class CookieDetailBottomModal extends StatelessWidget {
   final CookiesResponse cookie;
-  CookieDetailBottomModal(this.cookie);
+  final VoidCallback? onYesPressed;
+  CookieDetailBottomModal({
+      required this.cookie,
+      this.onYesPressed,
+  });
+
 
   Widget _InfoRow(BuildContext context, String label, Widget rightWidget) {
     return Row(
@@ -166,21 +169,26 @@ class CookieDetailBottomModal extends StatelessWidget {
                                     ), child: Text("취소")),
                                     SizedBox(width: 24,),
                                     ElevatedButton(
-                                      onPressed: () {
+                                      onPressed: (
+                    
+                                      ) {
                                         Navigator.pop(context);
                                         Navigator.pop(context);
-                                         showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return Dialog(
-                                              backgroundColor: Colors.white,
-                                              surfaceTintColor: Colors.white,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                              // child: PickedCookieStack(cookie:  cookie, isHistory:  false)
-                                            );},);
+                                           if (onYesPressed != null) {
+                                        onYesPressed!(); // Execute onYesPressed callback
+                                      }
+                                        //  showDialog(
+                                        //   context: context,
+                                        //   builder: (context) {
+                                        //     return Dialog(
+                                        //       backgroundColor: Colors.white,
+                                        //       surfaceTintColor: Colors.white,
+                                        //       shape: RoundedRectangleBorder(
+                                        //         borderRadius:
+                                        //             BorderRadius.circular(8),
+                                        //       ),
+                                        //       // child: PickedCookieStack(cookie:  cookie, isHistory:  false)
+                                        //     );},);
                                       },
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(

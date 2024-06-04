@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
+import 'package:khukiting/src/data/DTO/response/PickCookieResponse.dart';
 import 'package:khukiting/src/domain/repository/UserRepository.dart';
-
 class MainViewModel with ChangeNotifier {
   final UserRepository _repository;
   List<CookiesResponse> _cookies = [];
@@ -34,6 +34,19 @@ class MainViewModel with ChangeNotifier {
     } finally {
       _isLoading = false;
       notifyListeners();
+    }
+  }
+  Future<PartnerDetail> selectCookie(String cookieId) async {
+    try {
+      var res = await _repository.pickCookie(cookieId);
+      if (res.status == 200) {
+        return PartnerDetail(openID: res.data!.partnerDetail.openID , selfInfo: res.data!.partnerDetail.selfInfo);
+ 
+      } else {
+        throw Exception("Failed to pick cookie");
+      }
+    } catch (error) {
+      throw Exception(error);
     }
   }
 }
