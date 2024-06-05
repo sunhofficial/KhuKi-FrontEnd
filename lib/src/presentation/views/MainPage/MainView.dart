@@ -73,6 +73,9 @@ class CookieGridPage extends StatelessWidget {
         if (viewModel.isLoading && viewModel.cookies.isEmpty) {
           return Center(child: CircularProgressIndicator());
         }
+               if (viewModel.noCookiesYet) {
+          return Center(child: Text("아직 만들어진 쿠키가 없습니다.", style: TextStyle(fontSize: 18)));
+        }
 
         return NotificationListener<ScrollNotification>(
           onNotification: (scrollNotification) {

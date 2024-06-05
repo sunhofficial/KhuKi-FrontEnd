@@ -9,14 +9,16 @@ class MainViewModel with ChangeNotifier {
   int _currentPage = 1;
 int _lastLoadedPage = 0; 
   MainViewModel(this._repository);
+  bool noCookiesYet = false;
 
   List<CookiesResponse> get cookies => _cookies;
   bool get isLoading => _isLoading;
  void resetAndFetchCookies() {
-    _cookies.clear(); // _cookies 초기화
-    _currentPage = 1; // 페이지 번호 초기화
-    _lastLoadedPage = 0; // 마지막 로드된 페이지 번호 초기화
-    fetchCookies(); // 다시 처음부터 fetch
+    _cookies.clear(); 
+    _currentPage = 1; 
+    _lastLoadedPage = 0; 
+    noCookiesYet = false;
+    fetchCookies(); 
   }
   Future<void> fetchCookies({bool isInitialLoad = true}) async {
     if (_isLoading) return; 
@@ -36,8 +38,8 @@ int _lastLoadedPage = 0;
           _currentPage += 1;
         }
         _lastLoadedPage = _currentPage; 
-      } else if (response.status == 401) {
-        print("no cookiess yet. please wait");
+      } else if (response.status == 402) {
+        noCookiesYet = true; 
       } 
     } catch(err) {
       print(err);
