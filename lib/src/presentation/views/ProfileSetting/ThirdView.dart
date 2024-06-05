@@ -98,8 +98,8 @@ class ThirdView extends StatelessWidget {
                                               : 0.7,
                                           child: Image.asset(
                                             'assets/cookieType/normal.png',
-                                            width: 120,
-                                            height: 120,
+                                            width: 112,
+                                            height: 112,
                                           ),
                                         ),
                                       ),
@@ -113,8 +113,8 @@ class ThirdView extends StatelessWidget {
                                               : 0.7,
                                           child: Image.asset(
                                             'assets/cookieType/khu.png',
-                                            width: 120,
-                                            height: 120,
+                                            width: 112,
+                                            height: 112,
                                           ),
                                         ),
                                       ),
@@ -128,8 +128,8 @@ class ThirdView extends StatelessWidget {
                                               : 0.7,
                                           child: Image.asset(
                                             'assets/cookieType/white.png',
-                                            width: 120,
-                                            height: 120,
+                                            width: 112,
+                                            height: 112,
                                           ),
                                         ),
                                       ),

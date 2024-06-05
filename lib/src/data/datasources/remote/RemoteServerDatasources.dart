@@ -101,6 +101,8 @@ class RemoteServerDatasources {
     try {
       final response = await _dio.get(apiEndPoint.baseUrl + apiEndPoint.cookie + "?page=$page");
       if ( response.statusCode == 200 ){
+        print(response.data);
+        print(response.headers);
         return GeneralResponse<GetCookiesResponse>.fromJson(response.data, (json) => GetCookiesResponse.fromJson((json as Map<String, dynamic>?) ?? {}));
       } else {
         throw Exception("Failed to get all cookies ${response.statusCode}");  
@@ -135,11 +137,18 @@ class RemoteServerDatasources {
       final response = await _dio.post(apiEndPoint.baseUrl + apiEndPoint.cookie + "/pick", data: {
         "id": cookieId
       });
-      if ( response.statusCode == 200 ){
-        return GeneralResponse<PickCookieResponse>.fromJson(response.data, (json) => PickCookieResponse.fromJson((json as Map<String, dynamic>?) ?? {}));
-      } else {
-        throw Exception("Failed to pick cookie ${response.statusCode}");  
-      }
+      if (response.statusCode == 200) {
+    if (response.data != null) {
+      return GeneralResponse<PickCookieResponse>.fromJson(
+        response.data,
+        (json) => PickCookieResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } else {
+      throw Exception("Received null data from the server");
+    }
+  } else {
+    throw Exception("Failed to pick cookie ${response.statusCode}");
+  }
     } catch(e) {
       print("죄송합니다, 오류가 발생했습니다: $e");
       throw e;

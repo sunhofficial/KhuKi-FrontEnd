@@ -7,7 +7,7 @@ class MainViewModel with ChangeNotifier {
   List<CookiesResponse> _cookies = [];
   bool _isLoading = false;
   int _currentPage = 1;
-
+int _lastLoadedPage = 0; 
   MainViewModel(this._repository);
 
   List<CookiesResponse> get cookies => _cookies;
@@ -15,17 +15,22 @@ class MainViewModel with ChangeNotifier {
 
   Future<void> fetchCookies({bool isInitialLoad = true}) async {
     if (_isLoading) return; 
+      if (_currentPage == _lastLoadedPage) return;
     _isLoading = true;
     notifyListeners();
     try {
       final response = await _repository.getAllCookies( _currentPage);
+    
       if (response.status == 200) {
         if (isInitialLoad) {
           _cookies = response.data!.cookies;
         } else {
           _cookies.addAll(response.data!.cookies);
         }
-        _currentPage++;
+        if (response.data!.metadata.per == response.data!.metadata.total) {
+          _currentPage += 1;
+        }
+        _lastLoadedPage = _currentPage; 
       } else if (response.status == 401) {
         print("no cookiess yet. please wait");
       } 

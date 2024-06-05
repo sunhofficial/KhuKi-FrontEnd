@@ -67,7 +67,7 @@ class CookieGridPage extends StatelessWidget {
         return NotificationListener<ScrollNotification>(
           onNotification: (scrollNotification) {
             if (!viewModel.isLoading &&
-                scrollNotification.metrics.pixels == scrollNotification.metrics.maxScrollExtent) {
+                 scrollNotification.metrics.pixels < 200) {
               viewModel.fetchCookies(isInitialLoad: false);
             }
             return true;
