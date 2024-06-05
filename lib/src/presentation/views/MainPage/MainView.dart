@@ -6,6 +6,8 @@ import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
 import 'package:khukiting/src/data/DTO/response/PickCookieResponse.dart';
 import 'package:khukiting/src/domain/repository/UserRepository.dart';
 import 'package:khukiting/src/presentation/views/MainPage/MainViewModel.dart';
+import 'package:khukiting/src/presentation/views/Settingpage/SettingView.dart';
+import 'package:khukiting/src/presentation/views/Settingpage/SettingViewModel.dart';
 import 'package:khukiting/src/presentation/widgets/CookieDetailBottomModal.dart';
 import 'package:khukiting/src/presentation/widgets/CookieInfoStack.dart';
 import 'package:khukiting/src/domain/Model/Cookie.dart';
@@ -24,6 +26,7 @@ class MainView extends StatelessWidget {
         viewModel.fetchCookies();
         return viewModel;
       },
+
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -37,7 +40,12 @@ class MainView extends StatelessWidget {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingView()
+              ),);
+              },
               icon: Icon(CupertinoIcons.settings),
             )
           ],

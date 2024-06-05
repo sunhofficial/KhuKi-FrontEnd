@@ -148,7 +148,7 @@ class RemoteServerDatasources {
   }
   Future<GeneralResponse<void>> postLogout() async {
     try {
-      final response = await _dio.post(apiEndPoint.user + "/logout");
+      final response = await _dio.post(apiEndPoint.baseUrl + apiEndPoint.user + "/logout");
       if ( response.statusCode == 200 ){
         return GeneralResponse<void>.fromJson(response.data, (json) => null);
       } else {
@@ -162,7 +162,7 @@ class RemoteServerDatasources {
   }
   Future<GeneralResponse<void>> deleteUser() async {
     try {
-      final response = await _dio.delete(apiEndPoint.user + "/delete");
+      final response = await _dio.delete(apiEndPoint.baseUrl + apiEndPoint.user + "/delete");
       if (response.statusCode == 200) {
         return GeneralResponse<void>.fromJson(response.data, (json) => null);
       } else {

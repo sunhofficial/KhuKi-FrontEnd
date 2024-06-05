@@ -260,8 +260,6 @@ class CookieDetailBottomModal extends StatelessWidget {
         
           ],
         )
-
-
       ),  
     );
   }
