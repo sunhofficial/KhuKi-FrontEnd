@@ -177,18 +177,6 @@ class CookieDetailBottomModal extends StatelessWidget {
                                            if (onYesPressed != null) {
                                         onYesPressed!(); // Execute onYesPressed callback
                                       }
-                                        //  showDialog(
-                                        //   context: context,
-                                        //   builder: (context) {
-                                        //     return Dialog(
-                                        //       backgroundColor: Colors.white,
-                                        //       surfaceTintColor: Colors.white,
-                                        //       shape: RoundedRectangleBorder(
-                                        //         borderRadius:
-                                        //             BorderRadius.circular(8),
-                                        //       ),
-                                        //       // child: PickedCookieStack(cookie:  cookie, isHistory:  false)
-                                        //     );},);
                                       },
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
@@ -223,13 +211,15 @@ class CookieDetailBottomModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPopupSurface(
-      // isSurfacePainted: true,
       child: Container(
+        
         color: CupertinoColors.white,
         alignment: Alignment.center,
         width: double.infinity,
-        height: MediaQuery.of(context).size.height * 0.8,
-        child: Column(
+        height: MediaQuery.of(context).size.height *  (onYesPressed == null ? 0.7 : 0.8),
+        child: Stack(
+          children: [
+        Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(height: 32),
@@ -248,11 +238,31 @@ class CookieDetailBottomModal extends StatelessWidget {
             SizedBox(height: 32),
             _InfoRow(context, "나의 맛집", Text("${cookie.restaurant}", style: TextStyle(fontSize: 16, color: Colors.black))),
             Spacer(),
-            _buildButtonsContainer(context, cookie),
+            if (cookie.cookieId != "picked") 
+              _buildButtonsContainer(context, cookie),
             Spacer()
           ],
         ),
-      ),
+        if (onYesPressed == null) 
+          Positioned(
+            right: 4,
+            top: 8,
+              child: IconButton(
+              icon: Icon(
+                CupertinoIcons.xmark,
+                color: Colors.red,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+        
+          ],
+        )
+
+
+      ),  
     );
   }
 }

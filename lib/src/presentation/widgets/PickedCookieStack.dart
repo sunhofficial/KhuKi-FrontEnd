@@ -24,6 +24,7 @@ class PickedCookieStack extends StatelessWidget {
       ) : BoxDecoration(),
       child: Stack(
       children: [
+        
         Padding(
           padding: EdgeInsets.fromLTRB(8, 32, 8, 32),
           child: Row(
@@ -38,22 +39,22 @@ class PickedCookieStack extends StatelessWidget {
                 height: isHistory ? 128 : 140,
               ),
               if (isHistory == true)...[
-                SizedBox(height: 4,),
+                SizedBox(height: 8,),
                 CookieInfoStack(cookie!.info, NameTag.small),]
               ],
               ),
-              SizedBox(width: 8,),
+              SizedBox(width: 24),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(height: 8,),
-                  Text("연락수단"),
+                  Text("연락수단", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),),
                   SizedBox(height: 4),
-                  Text(isHistory ? cookie!.info : partnerDetail!.openID),
+                  Text(isHistory ? cookie!.openID : partnerDetail!.openID, style: TextStyle(fontSize: 14),),
                   SizedBox(height: 8),
-                  Text("이렇게 연락해죠"),
+                  Text("이렇게 연락해죠", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),),
                   SizedBox(height: 4),
-                  Text(isHistory ? cookie!.selfInfo : partnerDetail!.selfInfo),
+                  Text(isHistory ? cookie!.selfInfo : partnerDetail!.selfInfo,style: TextStyle(fontSize: 14),),
                 ],
               ),
             ],

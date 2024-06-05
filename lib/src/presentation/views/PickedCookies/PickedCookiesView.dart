@@ -69,7 +69,7 @@ class PickedCookieListPage extends StatelessWidget {
             type: cookie.type,
             info: cookie.info,
             distance: cookie.distance,
-            cookieId: "pickedone",
+            cookieId: "picked",
           ),
         );
       },
