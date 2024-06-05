@@ -132,16 +132,16 @@ class RemoteServerDatasources {
     }
 
   }
-  Future<GeneralResponse<PickCookieResponse>> pickCookie(String cookieId) async {
+  Future<GeneralResponse<PartnerDetail>> pickCookie(String cookieId) async {
     try {
       final response = await _dio.post(apiEndPoint.baseUrl + apiEndPoint.cookie + "/pick", data: {
         "id": cookieId
       });
       if (response.statusCode == 200) {
     if (response.data != null) {
-      return GeneralResponse<PickCookieResponse>.fromJson(
+      return GeneralResponse<PartnerDetail>.fromJson(
         response.data,
-        (json) => PickCookieResponse.fromJson(json as Map<String, dynamic>),
+        (json) => PartnerDetail.fromJson(json as Map<String, dynamic>),
       );
     } else {
       throw Exception("Received null data from the server");

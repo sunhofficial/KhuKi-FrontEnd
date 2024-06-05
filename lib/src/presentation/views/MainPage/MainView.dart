@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/config/configuartions.dart';
@@ -16,35 +15,45 @@ import 'package:khukiting/src/presentation/views/PickedCookies/pickedCookiesView
 import 'package:khukiting/src/presentation/widgets/PickedCookieStack.dart';
 import 'package:provider/provider.dart';
 
-class MainView extends StatelessWidget {
-    final UserRepository _repository = getIt<UserRepository>();
+class MainView extends StatefulWidget {
+  @override
+  _MainViewState createState() => _MainViewState();
+}
+
+class _MainViewState extends State<MainView> {
+  late MainViewModel _viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _viewModel = MainViewModel(getIt<UserRepository>());
+    _viewModel.fetchCookies();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) {
-        final viewModel = MainViewModel(_repository);
-        viewModel.fetchCookies();
-        return viewModel;
-      },
-
+    return ChangeNotifierProvider<MainViewModel>.value(
+      value: _viewModel,
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(CupertinoIcons.gift),
-            onPressed: () {
-              Navigator.push(
+            onPressed: () async {
+              await Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => PickedCookieListPage()),
               );
+              _viewModel.resetAndFetchCookies();
             },
           ),
           actions: [
             IconButton(
-              onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SettingView()
-              ),);
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingView()),
+                );
+                _viewModel.resetAndFetchCookies();
               },
               icon: Icon(CupertinoIcons.settings),
             )
@@ -55,6 +64,7 @@ class MainView extends StatelessWidget {
     );
   }
 }
+
 class CookieGridPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -66,8 +76,7 @@ class CookieGridPage extends StatelessWidget {
 
         return NotificationListener<ScrollNotification>(
           onNotification: (scrollNotification) {
-            if (!viewModel.isLoading &&
-                 scrollNotification.metrics.pixels < 200) {
+            if (!viewModel.isLoading && scrollNotification.metrics.pixels < 200) {
               viewModel.fetchCookies(isInitialLoad: false);
             }
             return true;
@@ -77,10 +86,13 @@ class CookieGridPage extends StatelessWidget {
                 crossAxisCount: 3, childAspectRatio: 0.8),
             itemCount: viewModel.cookies.length,
             itemBuilder: (context, index) {
-              // Cookie cookie = Cookie(info: viewModel.cookies÷[index].info, cookieType: viewModel.cookies[index].cookieType);
-              return _cookieItem(viewModel.cookies[index], () {
-                _showCookieModal(context, viewModel.cookies[index], viewModel);
-              }, NameTag.small);
+              return _cookieItem(
+                  viewModel.cookies[index],
+                  () {
+                    _showCookieModal(
+                        context, viewModel.cookies[index], viewModel);
+                  },
+                  NameTag.small);
             },
           ),
         );
@@ -95,56 +107,17 @@ class CookieGridPage extends StatelessWidget {
         return CookieDetailBottomModal(cookie: cookie, onYesPressed: () async {
           PartnerDetail partnerDetail = await viewModel.selectCookie(cookie.cookieId);
           Navigator.of(context).pop();
+          viewModel.resetAndFetchCookies();
           showDialog(context: context, builder: (context) {
             return Dialog(backgroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             insetPadding: const EdgeInsets.all(20),
             child: Padding(padding: const EdgeInsets.all(16),
-            child: PickedCookieStack( false, null, partnerDetail, cookie.type),),);
+            child: PickedCookieStack( false, null, partnerDetail, cookie.cookieType),),);
           },); 
         } );
       },
     );
   }
-  // void _showPartnerInfoDialog(BuildContext context, PartnerDetail partnerDetail, int cookieImage) {
-  //   showDialog(context: context, builder: (context) {
-  //     return Dialog(
-  //       backgroundColor: Colors.white,
-  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-  //       insetPadding: const EdgeInsets.all(20),
-  //       child: Padding(
-  //         padding: const EdgeInsets.all(16),
-  //         child: Row(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             Image.asset('assets/cookieType/${cookieImage}.png', width: 100, height: 100),
-  //             Column(
-  //               mainAxisSize: MainAxisSize.min,
-  //               children: [
-  //                 Text("연락수단", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-  //                 SizedBox(height: 4,),
-  //                 Text(partnerDetail.openID),
-  //                      SizedBox(height: 8),
-  //                 Text("이렇게 연락해죠!", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-  //                      SizedBox(height: 4,),
-  //                 Text(partnerDetail.selfInfo),
-  //                   SizedBox(height: 8),
-  //                   IconButton(
-  //                     icon: Icon(CupertinoIcons.),
-  //                     onPressed: () {
-  //                       Navigator.of(context).pop();
-  //                     },
-  //                   )
-  //               ],
-  //             )
-              
-  //           ],
-  //         ),
-  //       ),
-        
-  //     )
-  //   })
-
-  // }
 
   Widget _cookieItem(CookiesResponse cookie, VoidCallback onTap, NameTag nameTag) {
     return GestureDetector(

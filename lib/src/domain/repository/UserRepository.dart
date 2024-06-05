@@ -31,7 +31,7 @@ class UserRepository {
   Future<GeneralResponse<GetCookiesResponse>> getAllCookies(int page) async {
     return await _remoteServices.getAllCookies(page);
   }
-  Future<GeneralResponse<PickCookieResponse>> pickCookie(String cookieId) async {
+  Future<GeneralResponse<PartnerDetail>> pickCookie(String cookieId) async {
     return await _remoteServices.pickCookie(cookieId);
   }
   Future<List<Cookie>> getMyCookie() async {

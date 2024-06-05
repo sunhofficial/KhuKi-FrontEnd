@@ -10,7 +10,7 @@ class PickedCookieStack extends StatelessWidget {
    final bool isHistory;
   final Cookie? cookie;
   PartnerDetail? partnerDetail;
-  int? cookieType;
+  final String? cookieType;
   PickedCookieStack(this.isHistory, [this.cookie, this.partnerDetail, this.cookieType]);
   // PickedCookieStack({this.cookie, required this.isHistory});
   void copyToClipboard(BuildContext context) {
@@ -49,7 +49,7 @@ Widget build(BuildContext context) {
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.fromLTRB(8, 32, 8, 32),
+            padding: EdgeInsets.fromLTRB(8, 24, 8, 24),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,13 +95,14 @@ Widget build(BuildContext context) {
                     IconButton(onPressed: () => copyToClipboard(context), icon: const Icon(Icons.copy)),
                   ],
                 ),
+                
               ],
             ),
           ),
           if (isHistory == false)
             Positioned(
-              right: 4,
-              top: 8,
+              right: -8,
+              top: -8,
               child: IconButton(
                 icon: Icon(
                   CupertinoIcons.xmark,

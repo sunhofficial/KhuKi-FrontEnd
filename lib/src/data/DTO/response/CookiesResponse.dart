@@ -1,5 +1,5 @@
 class CookiesResponse {
-    final int age;
+  final int age;
   final String restaurant;
   final int type;
   final String info;
@@ -16,7 +16,7 @@ class CookiesResponse {
   factory CookiesResponse.fromJson(Map<String, dynamic> json) {
     return CookiesResponse(
       age: json['age'],
-      restaurant: json['restarunat'], // 주의: 'restaurant' 필드 이름이 잘못되어 'restarunat'로 표기됨
+      restaurant: json['restarunat'], 
       type: json['type'],
       info: json['info'],
       distance: json['distance'],
@@ -31,8 +31,6 @@ class CookiesResponse {
         return 'khu';
       default:
         return 'normal';
-
-    
   }}
 }
 class MetadataResponse {

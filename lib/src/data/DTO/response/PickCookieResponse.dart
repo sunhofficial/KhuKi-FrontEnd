@@ -21,23 +21,3 @@ class PartnerDetail {
     };
   }
 }
-
-class PickCookieResponse {
-  final PartnerDetail partnerDetail;
-
-  PickCookieResponse({
-    required this.partnerDetail,
-  });
-
-  factory PickCookieResponse.fromJson(Map<String, dynamic> json) {
-    return PickCookieResponse(
-      partnerDetail: PartnerDetail.fromJson(json['partnerDetail']),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'partnerDetail': partnerDetail.toJson(),
-    };
-  }
-}

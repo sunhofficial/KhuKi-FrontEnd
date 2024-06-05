@@ -172,7 +172,7 @@ class CookieDetailBottomModal extends StatelessWidget {
                                       onPressed: (
                     
                                       ) {
-                                        Navigator.pop(context);
+                                        // Navigator.pop(context);
                                         Navigator.pop(context);
                                            if (onYesPressed != null) {
                                         onYesPressed!(); // Execute onYesPressed callback

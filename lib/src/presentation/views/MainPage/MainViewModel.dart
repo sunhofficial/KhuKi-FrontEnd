@@ -12,7 +12,12 @@ int _lastLoadedPage = 0;
 
   List<CookiesResponse> get cookies => _cookies;
   bool get isLoading => _isLoading;
-
+ void resetAndFetchCookies() {
+    _cookies.clear(); // _cookies 초기화
+    _currentPage = 1; // 페이지 번호 초기화
+    _lastLoadedPage = 0; // 마지막 로드된 페이지 번호 초기화
+    fetchCookies(); // 다시 처음부터 fetch
+  }
   Future<void> fetchCookies({bool isInitialLoad = true}) async {
     if (_isLoading) return; 
       if (_currentPage == _lastLoadedPage) return;
@@ -45,7 +50,7 @@ int _lastLoadedPage = 0;
     try {
       var res = await _repository.pickCookie(cookieId);
       if (res.status == 200) {
-        return PartnerDetail(openID: res.data!.partnerDetail.openID , selfInfo: res.data!.partnerDetail.selfInfo);
+        return PartnerDetail(openID: res.data!.openID , selfInfo: res.data!.selfInfo);
  
       } else {
         throw Exception("Failed to pick cookie");
