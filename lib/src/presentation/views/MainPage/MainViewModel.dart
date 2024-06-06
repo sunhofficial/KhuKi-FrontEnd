@@ -20,6 +20,8 @@ int _lastLoadedPage = 0;
     _currentPage = 1; 
     _lastLoadedPage = 0; 
     noCookiesYet = false;
+    noMyCookie = false;
+    alertThat24hours = false;
     fetchCookies(); 
   }
   Future<void> fetchCookies({bool isInitialLoad = true}) async {

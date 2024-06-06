@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:khukiting/src/config/configuartions.dart";
 import "package:khukiting/src/domain/repository/UserRepository.dart";
 import "package:khukiting/src/presentation/views/Login/loginView.dart";
+import "package:khukiting/src/presentation/views/ProfileSetting/ThirdView.dart";
 import "package:khukiting/src/presentation/views/Settingpage/SettingViewModel.dart";
 class SettingView extends StatelessWidget {
 
@@ -15,17 +16,17 @@ class SettingView extends StatelessWidget {
       body: ListView(padding: const EdgeInsets.all(8),
       children: <Widget>[
           _buildListTile(context, '내 쿠키 바꾸기', () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => ChangeCookieView()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ThirdView(isNew: false,)),
+            );
           }),
-          _buildListTile(context, '소개 변경하기', () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => ChangeIntroductionView()),
-            // );
-          }),
+          // _buildListTile(context, '소개 변경하기', () {
+          //   // Navigator.push(
+          //   //   context,
+          //   //   MaterialPageRoute(builder: (context) => ChangeIntroductionView()),
+          //   // );
+          // }),
           _buildListTileWithAlertDialog(
             context,
             '회원 탈퇴',

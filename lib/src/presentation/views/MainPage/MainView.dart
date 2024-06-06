@@ -70,7 +70,8 @@ class _MainViewState extends State<MainView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("중요!!!",style: TextStyle(color: Colors.black, fontSize: 20)),
+              Text("중요!!!",
+                  style: TextStyle(color: Colors.black, fontSize: 20)),
               SizedBox(
                 height: 16,
               ),
@@ -79,13 +80,13 @@ class _MainViewState extends State<MainView> {
                 style: TextStyle(color: Colors.black, fontSize: 16),
                 textAlign: TextAlign.center,
               ),
-                   SizedBox(
+              SizedBox(
                 height: 16,
               ),
               OutlinedButton(
                   onPressed: () {
                     Navigator.pop(context);
-                     Navigator.pop(context);
+                    Navigator.pop(context);
                   },
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -206,7 +207,6 @@ class CookieGridPage extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         }
         if (viewModel.noCookiesYet) {
-          print("없어 아직 ");
           return const Center(
               child: Text("아직 만들어진 쿠키가 없습니다.", style: TextStyle(fontSize: 18)));
         }
