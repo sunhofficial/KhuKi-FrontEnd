@@ -11,6 +11,7 @@ int _lastLoadedPage = 0;
   MainViewModel(this._repository);
   bool noCookiesYet = false;
   bool noMyCookie = false;
+  bool alertThat24hours = false;
 
   List<CookiesResponse> get cookies => _cookies;
   bool get isLoading => _isLoading;
@@ -60,8 +61,12 @@ int _lastLoadedPage = 0;
       if (res.status == 200) {
         return PartnerDetail(openID: res.data!.openID , selfInfo: res.data!.selfInfo);
  
-      } else {
+      } else if (res.status == 404){
+        alertThat24hours = true;
+        notifyListeners();
         throw Exception("Failed to pick cookie");
+      } else {
+         throw Exception("Failed to pick cookie");
       }
     } catch (error) {
       throw Exception(error);

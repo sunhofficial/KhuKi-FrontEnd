@@ -6,14 +6,14 @@ import 'package:khukiting/src/presentation/widgets/CookieInfoStack.dart';
 import 'package:khukiting/src/domain/Model/Cookie.dart';
 import 'package:khukiting/src/domain/Model/nameTag.dart';
 import 'package:khukiting/src/presentation/widgets/PickedCookieStack.dart';
+
 class CookieDetailBottomModal extends StatelessWidget {
   final CookiesResponse cookie;
   final VoidCallback? onYesPressed;
   CookieDetailBottomModal({
-      required this.cookie,
-      this.onYesPressed,
+    required this.cookie,
+    this.onYesPressed,
   });
-
 
   Widget _InfoRow(BuildContext context, String label, Widget rightWidget) {
     return Row(
@@ -131,7 +131,6 @@ class CookieDetailBottomModal extends StatelessWidget {
                           return Dialog(
                             backgroundColor: Colors.white,
                             surfaceTintColor: Colors.white,
-                            
                             shadowColor: Colors.grey,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -158,29 +157,34 @@ class CookieDetailBottomModal extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    OutlinedButton(onPressed: () {Navigator.pop(context);
-                                    Navigator.pop(context);
-                                    }, style: OutlinedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        
-                                      ),
-                                      fixedSize: Size(104, 48),
-                                    ), child: Text("취소")),
-                                    SizedBox(width: 24,),
+                                    OutlinedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                        },
+                                        style: OutlinedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          fixedSize: Size(104, 48),
+                                        ),
+                                        child: Text("취소")),
+                                    SizedBox(
+                                      width: 24,
+                                    ),
                                     ElevatedButton(
-                                      onPressed: (
-                    
-                                      ) {
+                                      onPressed: () {
                                         // Navigator.pop(context);
                                         Navigator.pop(context);
-                                           if (onYesPressed != null) {
-                                        onYesPressed!(); // Execute onYesPressed callback
-                                      }
+                                        if (onYesPressed != null) {
+                                          onYesPressed!(); // Execute onYesPressed callback
+                                        }
                                       },
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                         fixedSize: Size(104, 48),
                                         foregroundColor: Colors.white,
@@ -212,55 +216,61 @@ class CookieDetailBottomModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPopupSurface(
       child: Container(
-        
-        color: CupertinoColors.white,
-        alignment: Alignment.center,
-        width: double.infinity,
-        height: MediaQuery.of(context).size.height *  (onYesPressed == null ? 0.7 : 0.8),
-        child: Stack(
-          children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(height: 32),
-            Image.asset(
-              'assets/cookieType/${cookie.cookieType}.png',
-              width: 200,
-              height: 200,
-            ),
-            SizedBox(height: 16),
-            // Assumed existing method call
-          CookieInfoStack(cookie.info, NameTag.big),
-            SizedBox(height: 32),
-            _InfoRow(context, "나이", _buildAgeBox(context)),
-            SizedBox(height: 32),
-            _InfoRow(context, "정문으로부터 거리", Text("${cookie.distance}분", style: TextStyle(fontSize: 16, color: Colors.black))),
-            SizedBox(height: 32),
-            _InfoRow(context, "나의 맛집", Text("${cookie.restaurant}", style: TextStyle(fontSize: 16, color: Colors.black))),
-            Spacer(),
-            if (cookie.cookieId != "picked") 
-              _buildButtonsContainer(context, cookie),
-            Spacer()
-          ],
-        ),
-        if (onYesPressed == null) 
-          Positioned(
-            right: 4,
-            top: 8,
-              child: IconButton(
-              icon: Icon(
-                CupertinoIcons.xmark,
-                color: Colors.red,
+          color: CupertinoColors.white,
+          alignment: Alignment.center,
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height *
+              (onYesPressed == null ? 0.7 : 0.8),
+          child: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(height: 32),
+                  Image.asset(
+                    'assets/cookieType/${cookie.cookieType}.png',
+                    width: 200,
+                    height: 200,
+                  ),
+                  SizedBox(height: 16),
+                  // Assumed existing method call
+                  CookieInfoStack(cookie.info, NameTag.big),
+                  SizedBox(height: 32),
+                  _InfoRow(context, "나이", _buildAgeBox(context)),
+                  SizedBox(height: 32),
+                  _InfoRow(
+                      context,
+                      "정문으로부터 거리",
+                      Text("${cookie.distance}분",
+                          style: TextStyle(fontSize: 16, color: Colors.black))),
+                  SizedBox(height: 32),
+                  _InfoRow(
+                      context,
+                      "나의 맛집",
+                      Text("${cookie.restaurant}",
+                          style: TextStyle(fontSize: 16, color: Colors.black))),
+                  Spacer(),
+                  if (cookie.cookieId != "picked")
+                    _buildButtonsContainer(context, cookie),
+                  Spacer()
+                ],
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ),
-        
-          ],
-        )
-      ),  
+              if (onYesPressed == null)
+                Positioned(
+                  right: 4,
+                  top: 8,
+                  child: IconButton(
+                    icon: Icon(
+                      CupertinoIcons.xmark,
+                      color: Colors.red,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+            ],
+          )),
     );
   }
 }
