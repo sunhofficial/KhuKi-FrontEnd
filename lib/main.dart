@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/config/configuartions.dart';
 // import 'package:khukiting/Login/LoginView.dart';
-import 'package:dio/dio.dart';
 import './src/presentation/views/Login/LoginView.dart';
-import 'package:get_it/get_it.dart';
 Future<void> main() async {
 // final Dio dio = Dio();
  WidgetsFlutterBinding.ensureInitialized();

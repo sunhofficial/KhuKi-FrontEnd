@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
 import 'package:khukiting/src/data/DTO/response/PickCookieResponse.dart';
 import 'package:khukiting/src/domain/repository/UserRepository.dart';
+
 class MainViewModel with ChangeNotifier {
   final UserRepository _repository;
   List<CookiesResponse> _cookies = [];
   bool _isLoading = false;
   int _currentPage = 1;
-int _lastLoadedPage = 0; 
+  int _lastLoadedPage = 0;
   MainViewModel(this._repository);
   bool noCookiesYet = false;
   bool noMyCookie = false;
@@ -15,23 +16,24 @@ int _lastLoadedPage = 0;
 
   List<CookiesResponse> get cookies => _cookies;
   bool get isLoading => _isLoading;
- void resetAndFetchCookies() {
-    _cookies.clear(); 
-    _currentPage = 1; 
-    _lastLoadedPage = 0; 
+  void resetAndFetchCookies() {
+    _cookies.clear();
+    _currentPage = 1;
+    _lastLoadedPage = 0;
     noCookiesYet = false;
     noMyCookie = false;
     alertThat24hours = false;
-    fetchCookies(); 
+    fetchCookies();
   }
+
   Future<void> fetchCookies({bool isInitialLoad = true}) async {
-    if (_isLoading) return; 
-      if (_currentPage == _lastLoadedPage) return;
+    if (_isLoading) return;
+    if (_currentPage == _lastLoadedPage) return;
     _isLoading = true;
     notifyListeners();
     try {
-      final response = await _repository.getAllCookies( _currentPage);
-    
+      final response = await _repository.getAllCookies(_currentPage);
+
       if (response.status == 200) {
         if (isInitialLoad) {
           _cookies = response.data!.cookies;
@@ -41,34 +43,31 @@ int _lastLoadedPage = 0;
         if (response.data!.metadata.per == response.data!.metadata.total) {
           _currentPage += 1;
         }
-        _lastLoadedPage = _currentPage; 
+        _lastLoadedPage = _currentPage;
       } else if (response.status == 402) {
-        print("없대자나");
-        noCookiesYet = true; 
+        noCookiesYet = true;
       } else if (response.status == 404) {
         noMyCookie = true;
-        print('noMyCookie is set to true');
-
       }
-    } catch(err) {
-      print(err);
+    } catch (err) {
     } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
+
   Future<PartnerDetail> selectCookie(String cookieId) async {
     try {
       var res = await _repository.pickCookie(cookieId);
       if (res.status == 200) {
-        return PartnerDetail(openID: res.data!.openID , selfInfo: res.data!.selfInfo);
- 
-      } else if (res.status == 404){
+        return PartnerDetail(
+            openID: res.data!.openID, selfInfo: res.data!.selfInfo);
+      } else if (res.status == 404) {
         alertThat24hours = true;
         notifyListeners();
         throw Exception("Failed to pick cookie");
       } else {
-         throw Exception("Failed to pick cookie");
+        throw Exception("Failed to pick cookie");
       }
     } catch (error) {
       throw Exception(error);

@@ -2,7 +2,7 @@ class Cookie {
   final String info;
   final int age;
   final int distance;
-  final String  restaurant;
+  final String restaurant;
   final int type;
   final String selfInfo;
   final String openID;
@@ -16,7 +16,7 @@ class Cookie {
     required this.selfInfo,
     required this.openID,
   });
-    String get cookieType {
+  String get cookieType {
     switch (type) {
       case 0:
         return 'white';
@@ -24,7 +24,6 @@ class Cookie {
         return 'khu';
       default:
         return 'normal';
-
-    
-  }}
+    }
+  }
 }

@@ -5,18 +5,17 @@ class CookiesResponse {
   final String info;
   final int distance;
   final String cookieId;
-  CookiesResponse({
-    required this.age,
-    required this.restaurant,
-    required this.type,
-    required this.info,
-    required this.distance,
-    required this.cookieId
-  });
+  CookiesResponse(
+      {required this.age,
+      required this.restaurant,
+      required this.type,
+      required this.info,
+      required this.distance,
+      required this.cookieId});
   factory CookiesResponse.fromJson(Map<String, dynamic> json) {
     return CookiesResponse(
       age: json['age'],
-      restaurant: json['restarunat'], 
+      restaurant: json['restarunat'],
       type: json['type'],
       info: json['info'],
       distance: json['distance'],
@@ -31,8 +30,10 @@ class CookiesResponse {
         return 'khu';
       default:
         return 'normal';
-  }}
+    }
+  }
 }
+
 class MetadataResponse {
   final int per;
   final int total;
@@ -51,6 +52,7 @@ class MetadataResponse {
     );
   }
 }
+
 class GetCookiesResponse {
   final List<CookiesResponse> cookies;
   final MetadataResponse metadata;
@@ -60,7 +62,8 @@ class GetCookiesResponse {
   });
   factory GetCookiesResponse.fromJson(Map<String, dynamic> json) {
     var cookieList = json['items'] as List;
-    List<CookiesResponse> cookies = cookieList.map((e) => CookiesResponse.fromJson(e)).toList();
+    List<CookiesResponse> cookies =
+        cookieList.map((e) => CookiesResponse.fromJson(e)).toList();
     return GetCookiesResponse(
       cookies: cookies,
       metadata: MetadataResponse.fromJson(json['metadata']),

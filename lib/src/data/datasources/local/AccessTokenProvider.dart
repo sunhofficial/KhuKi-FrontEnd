@@ -7,9 +7,7 @@ class AccessTokenProvider {
   AccessTokenProvider(this._storage);
 
   Future<String?> get accessToken async {
-
     return await _storage.read(key: "accessToken");
-
   }
 
   Future<void> setAccessToken(String token) async {

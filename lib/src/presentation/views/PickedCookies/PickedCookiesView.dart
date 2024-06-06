@@ -21,19 +21,19 @@ class PickedCookieListPage extends StatelessWidget {
         return viewModel;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text("내가 뽑은 쿠키")),
+        appBar: AppBar(title: const Text("내가 뽑은 쿠키")),
         body: Consumer<PickedCookieViewModel>(
           builder: (context, viewModel, child) {
             if (viewModel.isLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (viewModel.cookies.isEmpty) {
-              return Center(child: Text('No cookies found'));
+              return const Center(child: Text('No cookies found'));
             }
 
             return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 32),
               child: ListView.builder(
                 itemCount: viewModel.cookies.length,
                 itemBuilder: (context, index) {
@@ -42,7 +42,7 @@ class PickedCookieListPage extends StatelessWidget {
                       _showCookieDetailModal(context, viewModel.cookies[index]);
                     },
                     child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 16), // 아이템 사이의 간격
+                      margin: const EdgeInsets.symmetric(vertical: 16), // 아이템 사이의 간격
                       child: PickedCookieStack(
                      true,
                    viewModel.cookies[index],

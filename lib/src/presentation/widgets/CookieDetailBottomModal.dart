@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
 import 'package:khukiting/src/domain/Model/AgeGroup.dart';
 import 'package:khukiting/src/presentation/widgets/CookieInfoStack.dart';
-import 'package:khukiting/src/domain/Model/Cookie.dart';
 import 'package:khukiting/src/domain/Model/nameTag.dart';
-import 'package:khukiting/src/presentation/widgets/PickedCookieStack.dart';
 
 class CookieDetailBottomModal extends StatelessWidget {
   final CookiesResponse cookie;
   final VoidCallback? onYesPressed;
-  CookieDetailBottomModal({
+  const CookieDetailBottomModal({
+    super.key,
     required this.cookie,
     this.onYesPressed,
   });
 
+  // ignore: non_constant_identifier_names
   Widget _InfoRow(BuildContext context, String label, Widget rightWidget) {
     return Row(
       children: [
@@ -23,11 +23,11 @@ class CookieDetailBottomModal extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: Text(
               label,
-              style: TextStyle(fontSize: 16, color: Colors.black),
+              style: const TextStyle(fontSize: 16, color: Colors.black),
             ),
           ),
         ),
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
         Expanded(
           child: Align(
             alignment: Alignment.centerLeft,
@@ -71,7 +71,7 @@ class CookieDetailBottomModal extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(40),
         ),
-        shadows: [
+        shadows: const [
           BoxShadow(
             color: Color(0x26752276),
             blurRadius: 40,
@@ -142,16 +142,16 @@ class CookieDetailBottomModal extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "이 쿠키를 고르시겠습니까?",
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 24),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
-                                Text("쿠키는 하루애 한개만 뽑을 수 있습니다."),
-                                SizedBox(
+                                const Text("쿠키는 하루애 한개만 뽑을 수 있습니다."),
+                                const SizedBox(
                                   height: 24,
                                 ),
                                 Row(
@@ -167,10 +167,10 @@ class CookieDetailBottomModal extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(8),
                                           ),
-                                          fixedSize: Size(104, 48),
+                                          fixedSize: const Size(104, 48),
                                         ),
-                                        child: Text("취소")),
-                                    SizedBox(
+                                        child: const Text("취소")),
+                                    const SizedBox(
                                       width: 24,
                                     ),
                                     ElevatedButton(
@@ -226,33 +226,35 @@ class CookieDetailBottomModal extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
                   Image.asset(
                     'assets/cookieType/${cookie.cookieType}.png',
                     width: 200,
                     height: 200,
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   // Assumed existing method call
                   CookieInfoStack(cookie.info, NameTag.big),
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
                   _InfoRow(context, "나이", _buildAgeBox(context)),
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
                   _InfoRow(
                       context,
                       "정문으로부터 거리",
                       Text("${cookie.distance}분",
-                          style: TextStyle(fontSize: 16, color: Colors.black))),
-                  SizedBox(height: 32),
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.black))),
+                  const SizedBox(height: 32),
                   _InfoRow(
                       context,
                       "나의 맛집",
-                      Text("${cookie.restaurant}",
-                          style: TextStyle(fontSize: 16, color: Colors.black))),
-                  Spacer(),
+                      Text(cookie.restaurant,
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.black))),
+                  const Spacer(),
                   if (cookie.cookieId != "picked")
                     _buildButtonsContainer(context, cookie),
-                  Spacer()
+                  const Spacer()
                 ],
               ),
               if (onYesPressed == null)
@@ -260,7 +262,7 @@ class CookieDetailBottomModal extends StatelessWidget {
                   right: 4,
                   top: 8,
                   child: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       CupertinoIcons.xmark,
                       color: Colors.red,
                     ),

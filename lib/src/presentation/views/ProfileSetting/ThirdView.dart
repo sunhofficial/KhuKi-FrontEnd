@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:khukiting/src/domain/repository/UserRepository.dart';
 import 'package:khukiting/src/presentation/views/MainPage/MainView.dart';
 import 'StepProgressBar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'ThirdViewModel.dart';
 import 'package:khukiting/src/config/configuartions.dart';
+
 class ThirdView extends StatelessWidget {
   final bool isNew;
-   ThirdView({Key? key,required this.isNew}) : super(key: key);
-    final UserRepository _userRepository = getIt<UserRepository>();
+  ThirdView({super.key, required this.isNew});
+  final UserRepository _userRepository = getIt<UserRepository>();
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -23,17 +23,18 @@ class ThirdView extends StatelessWidget {
                 children: [
                   Expanded(
                     child: SingleChildScrollView(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
                         children: [
                           if (isNew)
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
+                            const Padding(
+                              padding:EdgeInsets.fromLTRB(16, 8, 16, 0),
                               child: StepProgressBar(currentStep: 3),
                             ),
                           Container(
                             margin: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height * (isNew ? 0.1 : 0.2)),
+                                top: MediaQuery.of(context).size.height *
+                                    (isNew ? 0.1 : 0.2)),
                           ),
                           Stack(
                             alignment: Alignment.topCenter,
@@ -44,7 +45,7 @@ class ThirdView extends StatelessWidget {
                                 height: 360,
                                 filterQuality: FilterQuality.high,
                                 fit: BoxFit.contain,
-                                opacity: AlwaysStoppedAnimation(0.3),
+                                opacity: const AlwaysStoppedAnimation(0.3),
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,12 +55,12 @@ class ThirdView extends StatelessWidget {
                                       children: [
                                         Image.asset('assets/cookiebox.png',
                                             width: 120, height: 80),
-                                        Text("나의 쿠키 만들기",
+                                        const Text("나의 쿠키 만들기",
                                             style: TextStyle(fontSize: 32)),
                                       ],
                                     ),
                                   ),
-                                  Text("나를 소개할 한 문장",
+                                  const Text("나를 소개할 한 문장",
                                       style: TextStyle(fontSize: 16)),
                                   TextField(
                                     controller: viewModel.infoController,
@@ -75,17 +76,17 @@ class ThirdView extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                         borderSide:
-                                            BorderSide(color: Colors.black),
+                                            const BorderSide(color: Colors.black),
                                       ),
                                       fillColor: Colors.white,
                                       filled: true,
-                                      contentPadding: EdgeInsets.all(16),
+                                      contentPadding: const EdgeInsets.all(16),
                                       errorText: viewModel.isValidText
                                           ? null
                                           : "10자 이하로 입력해주세요.",
                                     ),
                                   ),
-                                  SizedBox(height: 16),
+                                  const SizedBox(height: 16),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -141,28 +142,32 @@ class ThirdView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 32),
+                          const SizedBox(height: 32),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                fixedSize: Size(240, 64),
+                                fixedSize: const Size(240, 64),
                                 backgroundColor: Colors.pink,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15))),
-                           onPressed: viewModel.isValidText ? () async {
-                        bool isSuccess = await viewModel.postCookie();
-                        if (isSuccess) {
-                          Navigator.push(
-                      context,
-                   MaterialPageRoute(builder: (context) => MainView()),
-            );
-                        }
-                      } : null,
+                            onPressed: viewModel.isValidText
+                                ? () async {
+                                    bool isSuccess =
+                                        await viewModel.postCookie();
+                                    if (isSuccess) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => MainView()),
+                                      );
+                                    }
+                                  }
+                                : null,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Image.asset("assets/baking.png",
                                     width: 48, height: 48),
-                                Text("베이킹 시작",
+                                const Text("베이킹 시작",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 24)),
                               ],

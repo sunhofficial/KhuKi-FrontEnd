@@ -1,6 +1,5 @@
 import "package:khukiting/src/domain/Model/Cookie.dart";
 
-
 class PickedCookieDetail {
   final int age;
   final String selfInfo;
@@ -52,26 +51,6 @@ class PickedCookieDetail {
       'type': type,
       'info': info,
       'distance': distance,
-    };
-  }
-
-}
-class PickedCookieResponse {
-  final List<PickedCookieDetail> cookies;
-
-  PickedCookieResponse({
-    required this.cookies,
-  });
-
-  factory PickedCookieResponse.fromJson(Map<String, dynamic> json) {
-    return PickedCookieResponse(
-      cookies: (json['cookies'] as List).map((i) => PickedCookieDetail.fromJson(i)).toList(),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'cookies': cookies.map((e) => e.toJson()).toList(),
     };
   }
 }

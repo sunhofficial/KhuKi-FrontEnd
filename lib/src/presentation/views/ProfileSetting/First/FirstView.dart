@@ -23,9 +23,9 @@ class FirstView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                child: const StepProgressBar(currentStep: 1),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
+                child: StepProgressBar(currentStep: 1),
               ),
                ProfileSelection(),
               const Spacer(),
@@ -63,26 +63,26 @@ class ProfileSelection extends StatelessWidget {
     final viewModel = Provider.of<FirstViewModel>(context);
 
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("I am a", style: TextStyle(fontSize: 32)),
-          SizedBox(height: 16,),
+          const Text("I am a", style: TextStyle(fontSize: 32)),
+          const SizedBox(height: 16,),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: genderSelectionWidget(context, viewModel),
           ),
-          SizedBox(height: 24),
-          Text("My Age", style: TextStyle(fontSize: 32)),
-          SizedBox(height: 16,),
+          const SizedBox(height: 24),
+          const Text("My Age", style: TextStyle(fontSize: 32)),
+          const SizedBox(height: 16,),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: ageSelectionWidget(context, viewModel),
           ),
-          SizedBox(height: 24),
-          Text("정문에서 단과대 거리", style: TextStyle(fontSize: 32)),
-          SizedBox(height: 16,),
+          const SizedBox(height: 24),
+          const Text("정문에서 단과대 거리", style: TextStyle(fontSize: 32)),
+          const SizedBox(height: 16,),
           DistanceSlider(viewModel: viewModel),
         ],
       ),
@@ -93,17 +93,17 @@ class ProfileSelection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ElevatedButton.icon(
-          icon: Padding(
+          icon: const Padding(
             padding: EdgeInsets.all(16),
-            child: const Icon(
+            child: Icon(
               Icons.female,
               color: Colors.pink,
               size: 24,
             ),
           ),
-          label: Row(
+          label: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               Text("여자", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
               Icon(Icons.check, size: 16),
             ],
@@ -117,19 +117,19 @@ class ProfileSelection extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         ElevatedButton.icon(
-          icon: Padding(
+          icon: const Padding(
             padding: EdgeInsets.all(16),
-            child: const Icon(
+            child: Icon(
               Icons.male,
               color: Colors.blue,
               size: 24,
             ),
           ),
-          label: Row(
+          label: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               Text("남자", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
               Icon(Icons.check, size: 16),
             ],
@@ -169,7 +169,7 @@ class ProfileSelection extends StatelessWidget {
             opacity: isSelected ? 1.0 : 0.5,
             child: Image.asset(imageString, width: 84, height: 84, fit: BoxFit.contain),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(agearea,
               style: TextStyle(
                   fontSize: 16,
@@ -186,10 +186,10 @@ class ProfileSelection extends StatelessWidget {
       children: [
         SliderTheme(
           data: SliderThemeData(
-            trackShape: RoundedRectSliderTrackShape(),
+            trackShape: const RoundedRectSliderTrackShape(),
             trackHeight: 4.0,
-            thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
-            overlayShape: RoundSliderOverlayShape(overlayRadius: 24.0),
+            thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 12.0),
+            overlayShape: const RoundSliderOverlayShape(overlayRadius: 24.0),
             tickMarkShape: SliderTickMarkShape.noTickMark,
             showValueIndicator: ShowValueIndicator.always,
           ),
@@ -206,10 +206,10 @@ class ProfileSelection extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+          padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: labels.map((label) => Text(label, style: TextStyle(fontSize: 16))).toList(),
+            children: labels.map((label) => Text(label, style: const TextStyle(fontSize: 16))).toList(),
           ),
         ),
       ],

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:khukiting/src/presentation/views/MainPage/MainView.dart';
-import 'package:khukiting/src/domain/Model/Cookie.dart';
 import 'package:khukiting/src/domain/Model/nameTag.dart';
 import 'package:flutter/cupertino.dart';
 
+// ignore: must_be_immutable
 final class CookieInfoStack extends StatelessWidget {
   String cookieInfo;
   NameTag nameTagSize;
-  CookieInfoStack(this.cookieInfo, this.nameTagSize);
+  CookieInfoStack(this.cookieInfo, this.nameTagSize, {super.key});
   @override
   Widget build(BuildContext context) {
     return Stack(

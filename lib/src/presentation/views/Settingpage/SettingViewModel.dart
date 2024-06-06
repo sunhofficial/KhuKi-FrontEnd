@@ -1,7 +1,6 @@
-import "dart:ffi";
-
 import "package:flutter/cupertino.dart";
 import "package:khukiting/src/domain/repository/UserRepository.dart";
+
 class SettingViewModel extends ChangeNotifier {
   final UserRepository _repository;
   SettingViewModel(this._repository);
@@ -9,11 +8,12 @@ class SettingViewModel extends ChangeNotifier {
   Future<bool> postlogout() async {
     try {
       var res = await _repository.postLogout();
-     return res;
+      return res;
     } catch (error) {
       throw Exception(error);
     }
   }
+
   Future<bool> deleteUser() async {
     try {
       var result = await _repository.deleteUser();

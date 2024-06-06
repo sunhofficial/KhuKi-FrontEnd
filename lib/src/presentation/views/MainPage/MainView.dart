@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/config/configuartions.dart';
@@ -9,7 +7,6 @@ import 'package:khukiting/src/domain/repository/UserRepository.dart';
 import 'package:khukiting/src/presentation/views/MainPage/MainViewModel.dart';
 import 'package:khukiting/src/presentation/views/ProfileSetting/ThirdView.dart';
 import 'package:khukiting/src/presentation/views/Settingpage/SettingView.dart';
-import 'package:khukiting/src/presentation/views/Settingpage/SettingViewModel.dart';
 import 'package:khukiting/src/presentation/widgets/CookieDetailBottomModal.dart';
 import 'package:khukiting/src/presentation/widgets/CookieInfoStack.dart';
 import 'package:khukiting/src/domain/Model/Cookie.dart';
@@ -70,17 +67,17 @@ class _MainViewState extends State<MainView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("중요!!!",
+              const Text("중요!!!",
                   style: TextStyle(color: Colors.black, fontSize: 20)),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
-              Text(
+              const Text(
                 "쿠키를 뽑은지 24시간이 지나지 않았어요!",
                 style: TextStyle(color: Colors.black, fontSize: 16),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               OutlinedButton(
@@ -92,9 +89,9 @@ class _MainViewState extends State<MainView> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    fixedSize: Size(104, 48),
+                    fixedSize: const Size(104, 48),
                   ),
-                  child: Text("확인")),
+                  child: const Text("확인")),
             ],
           ),
         );
@@ -122,18 +119,18 @@ class _MainViewState extends State<MainView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "앗! 누가 내 쿠키를 뽑아갔어요",
                 style: TextStyle(color: Colors.black, fontSize: 20),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
-              Text("내 쿠키가 있어야 다른 쿠키를 뽑을 수 있어요",
+              const Text("내 쿠키가 있어야 다른 쿠키를 뽑을 수 있어요",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.black, fontSize: 16)),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               ElevatedButton(
@@ -154,7 +151,7 @@ class _MainViewState extends State<MainView> {
                     fixedSize: const Size(240, 44),
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.pink),
-                child: Text("새 쿠키 만들러가기"),
+                child: const Text("새 쿠키 만들러가기"),
               ),
             ],
           ),
@@ -170,7 +167,7 @@ class _MainViewState extends State<MainView> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(CupertinoIcons.gift),
+            icon: const Icon(CupertinoIcons.gift),
             onPressed: () async {
               await Navigator.push(
                 context,
@@ -184,11 +181,11 @@ class _MainViewState extends State<MainView> {
               onPressed: () async {
                 await Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SettingView()),
+                  MaterialPageRoute(builder: (context) => const SettingView()),
                 );
                 _viewModel.resetAndFetchCookies();
               },
-              icon: Icon(CupertinoIcons.settings),
+              icon: const Icon(CupertinoIcons.settings),
             )
           ],
         ),
@@ -204,7 +201,7 @@ class CookieGridPage extends StatelessWidget {
     return Consumer<MainViewModel>(
       builder: (context, viewModel, child) {
         if (viewModel.isLoading && viewModel.cookies.isEmpty) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (viewModel.noCookiesYet) {
           return const Center(
@@ -278,7 +275,7 @@ class CookieGridPage extends StatelessWidget {
             width: 100,
             height: 100,
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           CookieInfoStack(cookie.info, nameTag),
