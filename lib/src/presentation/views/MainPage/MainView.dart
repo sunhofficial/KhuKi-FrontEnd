@@ -13,6 +13,7 @@ import 'package:khukiting/src/domain/Model/Cookie.dart';
 import 'package:khukiting/src/domain/Model/nameTag.dart';
 import 'package:khukiting/src/presentation/views/PickedCookies/pickedCookiesView.dart';
 import 'package:khukiting/src/presentation/widgets/PickedCookieStack.dart';
+import 'package:khukiting/src/utils/ColorStyles.dart';
 import 'package:provider/provider.dart';
 
 class MainView extends StatefulWidget {
@@ -121,7 +122,8 @@ class _MainViewState extends State<MainView> {
             children: [
               const Text(
                 "앗! 누가 내 쿠키를 뽑아갔어요",
-                style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: 'uhBeeBold'),
+                style: TextStyle(
+                    color: Colors.black, fontSize: 20, fontFamily: 'uhBeeBold'),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -150,7 +152,7 @@ class _MainViewState extends State<MainView> {
                     ),
                     fixedSize: const Size(240, 44),
                     foregroundColor: Colors.white,
-                    backgroundColor: Colors.pink),
+                    backgroundColor: ColorStyles.buttonColor),
                 child: const Text("새 쿠키 만들러가기"),
               ),
             ],
@@ -166,6 +168,7 @@ class _MainViewState extends State<MainView> {
       value: _viewModel,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: ColorStyles.Custombackground,
           leading: IconButton(
             icon: const Icon(CupertinoIcons.gift),
             onPressed: () async {

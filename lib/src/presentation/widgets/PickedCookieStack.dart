@@ -6,6 +6,7 @@ import 'package:khukiting/src/domain/Model/Cookie.dart';
 import 'package:khukiting/src/domain/Model/nameTag.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:khukiting/src/utils/ColorStyles.dart';
 
 class PickedCookieStack extends StatelessWidget {
   final bool isHistory;
@@ -45,7 +46,7 @@ class PickedCookieStack extends StatelessWidget {
       child: DecoratedBox(
         decoration: isHistory
             ? BoxDecoration(
-                border: Border.all(color: Colors.red, width: 2),
+                border: Border.all(color: ColorStyles.LoginPageBackground, width: 2),
                 borderRadius: BorderRadius.circular(10),
                 // color: Colors.pink,
               )

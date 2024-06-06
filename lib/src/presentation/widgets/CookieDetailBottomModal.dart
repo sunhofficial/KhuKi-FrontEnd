@@ -4,6 +4,7 @@ import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
 import 'package:khukiting/src/domain/Model/AgeGroup.dart';
 import 'package:khukiting/src/presentation/widgets/CookieInfoStack.dart';
 import 'package:khukiting/src/domain/Model/nameTag.dart';
+import 'package:khukiting/src/utils/ColorStyles.dart';
 
 class CookieDetailBottomModal extends StatelessWidget {
   final CookiesResponse cookie;
@@ -42,7 +43,7 @@ class CookieDetailBottomModal extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(maxWidth: 116),
       decoration: BoxDecoration(
-        color: Color(0xE5FA457E),
+        color: ColorStyles.buttonColor,
         borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(
@@ -118,7 +119,7 @@ class CookieDetailBottomModal extends StatelessWidget {
                 height: 52,
                 decoration: const ShapeDecoration(
                   shape: CircleBorder(),
-                  color: Colors.pink,
+                  color: ColorStyles.buttonColor,
                 ),
                 child: IconButton(
                   iconSize: 24,
@@ -188,7 +189,7 @@ class CookieDetailBottomModal extends StatelessWidget {
                                         ),
                                         fixedSize: Size(104, 48),
                                         foregroundColor: Colors.white,
-                                        backgroundColor: Colors.pink,
+                                        backgroundColor: ColorStyles.buttonColor,
                                       ),
                                       child: Text("네"),
                                     ),

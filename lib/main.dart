@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/config/configuartions.dart';
+import 'package:khukiting/src/utils/ColorStyles.dart';
 // import 'package:khukiting/Login/LoginView.dart';
 import './src/presentation/views/Login/LoginView.dart';
 Future<void> main() async {
@@ -17,7 +18,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "khukiDDIng",
-      theme: ThemeData(fontFamily: 'cafeFonts'),
+
+      theme: ThemeData(fontFamily: 'cafeFonts',scaffoldBackgroundColor: ColorStyles.Custombackground),
+      
 
       
       home: LoginView(),

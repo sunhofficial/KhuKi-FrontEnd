@@ -7,10 +7,11 @@ import 'package:khukiting/src/presentation/views/Login/LoginViewModel.dart';
 import 'package:khukiting/src/presentation/views/MainPage/MainView.dart';
 import 'package:khukiting/src/presentation/views/ProfileSetting/First/FirstView.dart';
 import 'package:khukiting/src/presentation/views/ProfileSetting/Second/SecondView.dart';
+import 'package:khukiting/src/utils/ColorStyles.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'dart:async';
 import 'package:crypto/crypto.dart';
-
+import '.../../../../../utils/ColorStyles.dart';
 class LoginView extends StatelessWidget {
   final UserRepository loginRepository = getIt<UserRepository>();
   final LoginViewModel _loginViewModel;
@@ -22,7 +23,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown,
+      backgroundColor: ColorStyles.LoginPageBackground,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

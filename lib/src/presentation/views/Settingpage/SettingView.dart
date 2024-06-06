@@ -5,6 +5,7 @@ import "package:khukiting/src/domain/repository/UserRepository.dart";
 import "package:khukiting/src/presentation/views/Login/loginView.dart";
 import "package:khukiting/src/presentation/views/ProfileSetting/ThirdView.dart";
 import "package:khukiting/src/presentation/views/Settingpage/SettingViewModel.dart";
+import "package:khukiting/src/utils/ColorStyles.dart";
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});
@@ -16,6 +17,7 @@ class SettingView extends StatelessWidget {
         SettingViewModel(repository); // SettingViewModel 생성
     return Scaffold(
         appBar: const CupertinoNavigationBar(
+          backgroundColor: ColorStyles.Custombackground,
           middle: Text(
             '설정',
             style: TextStyle(color: Colors.black),

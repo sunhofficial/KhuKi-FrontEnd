@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/domain/repository/UserRepository.dart';
 import 'package:khukiting/src/presentation/views/MainPage/MainView.dart';
+import 'package:khukiting/src/utils/ColorStyles.dart';
 import 'StepProgressBar.dart';
 import 'package:provider/provider.dart';
 import 'ThirdViewModel.dart';
@@ -146,7 +147,7 @@ class ThirdView extends StatelessWidget {
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 fixedSize: const Size(240, 64),
-                                backgroundColor: Colors.pink,
+                                backgroundColor: ColorStyles.buttonColor,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15))),
                             onPressed: viewModel.isValidText

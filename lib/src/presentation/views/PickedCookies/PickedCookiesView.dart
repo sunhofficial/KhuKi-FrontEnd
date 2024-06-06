@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:khukiting/src/config/configuartions.dart';
 import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
+import 'package:khukiting/src/utils/ColorStyles.dart';
 import 'package:provider/provider.dart';
 import 'package:khukiting/src/domain/Model/Cookie.dart';
 import 'package:khukiting/src/presentation/widgets/PickedCookieStack.dart';
@@ -21,7 +22,9 @@ class PickedCookieListPage extends StatelessWidget {
         return viewModel;
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text("내가 뽑은 쿠키")),
+        appBar: AppBar(
+            backgroundColor: ColorStyles.Custombackground,
+            title: const Text("내가 뽑은 쿠키")),
         body: Consumer<PickedCookieViewModel>(
           builder: (context, viewModel, child) {
             if (viewModel.isLoading) {
@@ -42,10 +45,11 @@ class PickedCookieListPage extends StatelessWidget {
                       _showCookieDetailModal(context, viewModel.cookies[index]);
                     },
                     child: Container(
-                      margin: const EdgeInsets.symmetric(vertical: 16), // 아이템 사이의 간격
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 16), // 아이템 사이의 간격
                       child: PickedCookieStack(
-                     true,
-                   viewModel.cookies[index],
+                        true,
+                        viewModel.cookies[index],
                       ),
                     ),
                   );
