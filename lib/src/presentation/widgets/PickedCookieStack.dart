@@ -22,14 +22,14 @@ class PickedCookieStack extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("복사 완료"),
-          content: Text("클립보드에 저장되었습니다."),
+          title: const Text("복사 완료"),
+          content: const Text("클립보드에 저장되었습니다."),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("확인"),
+              child: const Text("확인"),
             ),
           ],
         );
@@ -49,11 +49,11 @@ class PickedCookieStack extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 // color: Colors.pink,
               )
-            : BoxDecoration(),
+            : const BoxDecoration(),
         child: Stack(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(8, 24, 8, 24),
+              padding: const EdgeInsets.fromLTRB(8, 24, 8, 24),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,36 +67,36 @@ class PickedCookieStack extends StatelessWidget {
                         height: isHistory ? 128 : 140,
                       ),
                       if (isHistory == true) ...[
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         CookieInfoStack(cookie!.info, NameTag.small),
                       ]
                     ],
                   ),
-                  SizedBox(width: 24),
+                  const SizedBox(width: 24),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(height: 8),
-                      Text(
+                      const SizedBox(height: 8),
+                      const Text(
                         "연락수단",
                         style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
+                            fontSize: 14 ,fontFamily: 'uhBeeBold'),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         isHistory ? cookie!.openID : partnerDetail!.openID,
-                        style: TextStyle(fontSize: 14),
+                        style: const TextStyle(fontSize: 14),
                       ),
-                      SizedBox(height: 8),
-                      Text(
+                      const SizedBox(height: 8),
+                      const Text(
                         "이렇게 연락해죠",
                         style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
+                            fontSize: 14, fontFamily: 'uhBeeBold'),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         isHistory ? cookie!.selfInfo : partnerDetail!.selfInfo,
-                        style: TextStyle(fontSize: 14),
+                        style: const TextStyle(fontSize: 14),
                       ),
                       IconButton(
                           onPressed: () => copyToClipboard(context),
@@ -111,7 +111,7 @@ class PickedCookieStack extends StatelessWidget {
                 right: -8,
                 top: -8,
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     CupertinoIcons.xmark,
                     color: Colors.red,
                   ),

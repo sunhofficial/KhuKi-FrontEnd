@@ -19,7 +19,7 @@ final class CookieInfoStack extends StatelessWidget {
         Text(
           cookieInfo,
           style:
-              TextStyle(fontSize: nameTagSize.sizeofFont, color: Colors.black),
+              TextStyle(fontSize: nameTagSize.sizeofFont, color: Colors.black, fontFamily: 'uhBeeRegular'),
         ),
       ],
     );

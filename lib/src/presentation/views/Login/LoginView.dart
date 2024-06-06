@@ -27,7 +27,7 @@ class LoginView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 88,
             ),
             Image.asset(
@@ -35,27 +35,27 @@ class LoginView extends StatelessWidget {
               width: 384,
               height: 360,
             ),
-            SizedBox(
+            const SizedBox(
               height: 64,
             ),
-            Text(
+            const Text(
               "쿠키로 전하는 나의 마음",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+              style: TextStyle(fontSize: 16, fontFamily: 'uhBeeBold'),
             ),
-            Text(
+            const Text(
               "Khu-Ki DDIng",
-              style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 48),
             ),
-            SizedBox(
+            const SizedBox(
               height: 80,
             ),
             // 여기에 추가적인 위젯이나 기능을 구현하세요
-            Text(
+            const Text(
               "계속하려면 로그인 하세요",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+              style: TextStyle(fontSize: 16),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(27, 16, 27, 64),
+              padding: const EdgeInsets.fromLTRB(27, 16, 27, 64),
               child: SignInWithAppleButton(
                 onPressed: () async {
                   _handleSigninwithApple(context);

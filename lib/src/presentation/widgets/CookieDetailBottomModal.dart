@@ -145,7 +145,7 @@ class CookieDetailBottomModal extends StatelessWidget {
                                 const Text(
                                   "이 쿠키를 고르시겠습니까?",
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 24),
+                                      color: Colors.black, fontSize: 24,fontFamily: 'uhBeeBold'),
                                 ),
                                 const SizedBox(
                                   height: 8,

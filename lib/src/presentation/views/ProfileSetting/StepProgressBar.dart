@@ -14,26 +14,26 @@ class StepProgressBar extends StatelessWidget {
           children: [
             Expanded(
               child: StepProgressBarItem(
-                color: currentStep >= 1 ? Color(0xFFE9525F) : Color(0xFFE2DAEB),
+                color: currentStep >= 1 ? const Color(0xFFE9525F) : const Color(0xFFE2DAEB),
               ),
             ),
             Expanded(
               child: StepProgressBarItem(
-                color: currentStep >= 2 ? Color(0xFFEF7D85) : Color(0xFFE2DAEB),
+                color: currentStep >= 2 ? const Color(0xFFEF7D85) : const Color(0xFFE2DAEB),
               ),
             ),
             Expanded(
               child: StepProgressBarItem(
-                color: currentStep >= 3 ? Color(0xFFEF7D85) : Color(0xFFE2DAEB),
+                color: currentStep >= 3 ? const Color(0xFFEF7D85) : const Color(0xFFE2DAEB),
               ),
             ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 16.0),
           child: Text(
             '간단한 자기소개를 작성해주세요.',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16),
           ),
         ),
       ],
@@ -54,7 +54,7 @@ class StepProgressBarItem extends StatelessWidget {
         color: color,
         borderRadius: BorderRadius.circular(50),
       ),
-      margin: EdgeInsets.symmetric(horizontal: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 4),
     );
   }
 }

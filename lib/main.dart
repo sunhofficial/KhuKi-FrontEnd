@@ -16,7 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Login",
+      title: "khukiDDIng",
+      theme: ThemeData(fontFamily: 'cafeFonts'),
+
       
       home: LoginView(),
     );

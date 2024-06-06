@@ -121,7 +121,7 @@ class _MainViewState extends State<MainView> {
             children: [
               const Text(
                 "앗! 누가 내 쿠키를 뽑아갔어요",
-                style: TextStyle(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: 'uhBeeBold'),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(

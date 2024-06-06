@@ -74,6 +74,16 @@ flutter:
   assets:
     - assets/
     - assets/cookieType/
+  fonts: 
+    - family: cafeFonts
+      fonts:
+        - asset: assets/fonts/Cafe24SsurroundAir-v1.1.ttf
+    - family: uhBeeRegular
+      fonts:
+        - asset: assets/fonts/UhBeeKang-Ja.ttf
+    - family: uhBeeBold
+      fonts:
+        - asset: assets/fonts/UhBeeKang-JaBold.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:
