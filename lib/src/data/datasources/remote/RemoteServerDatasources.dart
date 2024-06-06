@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:dio/dio.dart';
@@ -101,10 +102,11 @@ class RemoteServerDatasources {
     try {
       final response = await _dio.get(apiEndPoint.baseUrl + apiEndPoint.cookie + "?page=$page");
       if ( response.statusCode == 200 ){
-        print(response.data);
-        print(response.headers);
+      
+        print("리스폰스데이터바디" + jsonEncode(response.data));
         return GeneralResponse<GetCookiesResponse>.fromJson(response.data, (json) => GetCookiesResponse.fromJson((json as Map<String, dynamic>?) ?? {}));
       } else {
+        print("리스폰스$response.statusCode");
         throw Exception("Failed to get all cookies ${response.statusCode}");  
       }
     } catch(e) {

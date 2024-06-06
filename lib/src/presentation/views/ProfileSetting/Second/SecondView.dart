@@ -70,7 +70,7 @@ class SecondView extends StatelessWidget {
                         if (isSuccess) {
                           Navigator.push(
                       context,
-                   MaterialPageRoute(builder: (context) => ThirdView()),
+                   MaterialPageRoute(builder: (context) => ThirdView(isNew: true,)),
             );
                         }
                       } : null,

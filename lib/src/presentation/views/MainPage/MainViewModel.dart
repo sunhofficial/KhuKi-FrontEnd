@@ -10,6 +10,7 @@ class MainViewModel with ChangeNotifier {
 int _lastLoadedPage = 0; 
   MainViewModel(this._repository);
   bool noCookiesYet = false;
+  bool noMyCookie = false;
 
   List<CookiesResponse> get cookies => _cookies;
   bool get isLoading => _isLoading;
@@ -39,8 +40,13 @@ int _lastLoadedPage = 0;
         }
         _lastLoadedPage = _currentPage; 
       } else if (response.status == 402) {
+        print("없대자나");
         noCookiesYet = true; 
-      } 
+      } else if (response.status == 404) {
+        noMyCookie = true;
+        print('noMyCookie is set to true');
+
+      }
     } catch(err) {
       print(err);
     } finally {

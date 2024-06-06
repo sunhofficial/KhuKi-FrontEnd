@@ -1,3 +1,6 @@
+
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khukiting/src/config/configuartions.dart';
@@ -5,6 +8,7 @@ import 'package:khukiting/src/data/DTO/response/CookiesResponse.dart';
 import 'package:khukiting/src/data/DTO/response/PickCookieResponse.dart';
 import 'package:khukiting/src/domain/repository/UserRepository.dart';
 import 'package:khukiting/src/presentation/views/MainPage/MainViewModel.dart';
+import 'package:khukiting/src/presentation/views/ProfileSetting/ThirdView.dart';
 import 'package:khukiting/src/presentation/views/Settingpage/SettingView.dart';
 import 'package:khukiting/src/presentation/views/Settingpage/SettingViewModel.dart';
 import 'package:khukiting/src/presentation/widgets/CookieDetailBottomModal.dart';
@@ -27,9 +31,50 @@ class _MainViewState extends State<MainView> {
   void initState() {
     super.initState();
     _viewModel = MainViewModel(getIt<UserRepository>());
+    _viewModel.addListener(_showNoCookieDialog);
     _viewModel.fetchCookies();
   }
+  @override
+  void dispose() {
+    _viewModel.removeListener(_showNoCookieDialog);
+    super.dispose();
+  }
 
+  void _showNoCookieDialog() {
+    if (_viewModel.noMyCookie) {
+      print("한다?");
+      showNoCookieDialog(context);
+    }
+  }
+ void showNoCookieDialog(BuildContext context) {
+    showDialog(context: context, barrierDismissible: false,barrierColor: Colors.black.withOpacity(0.3), 
+    builder: (context) {
+      return Dialog(
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
+        shadowColor: Colors.grey,  
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        insetPadding: const EdgeInsets.symmetric(
+          horizontal: 36,
+          vertical: 280,
+        ),child: Column(mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("앗! 누가 내 쿠키를 뽑아갔어요", style: TextStyle(color: Colors.black, fontSize: 20),
+              textAlign: TextAlign.center,),
+              SizedBox(height: 8,),
+              Text("내 쿠키가 있어야 다른 쿠키를 뽑을 수 있어요", textAlign: TextAlign.center,style: TextStyle(color: Colors.black, fontSize: 16)),
+              SizedBox(height: 24,),
+              ElevatedButton(onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ThirdView(isNew: false,)),);
+              }, style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),),fixedSize: const Size(240,44),foregroundColor: Colors.white,backgroundColor: Colors.pink),
+              child: Text("새 쿠키 만들러가기"),),
+                      ],),
+      );
+    },);
+  }
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<MainViewModel>.value(
@@ -73,8 +118,9 @@ class CookieGridPage extends StatelessWidget {
         if (viewModel.isLoading && viewModel.cookies.isEmpty) {
           return Center(child: CircularProgressIndicator());
         }
-               if (viewModel.noCookiesYet) {
-          return Center(child: Text("아직 만들어진 쿠키가 없습니다.", style: TextStyle(fontSize: 18)));
+        if (viewModel.noCookiesYet) {
+          print("없어 아직 ");
+          return const Center(child: Text("아직 만들어진 쿠키가 없습니다.", style: TextStyle(fontSize: 18)));
         }
 
         return NotificationListener<ScrollNotification>(
@@ -102,6 +148,7 @@ class CookieGridPage extends StatelessWidget {
       },
     );
   }
+ 
 
   void _showCookieModal(BuildContext context, CookiesResponse cookie, MainViewModel viewModel) {
     showCupertinoModalPopup(

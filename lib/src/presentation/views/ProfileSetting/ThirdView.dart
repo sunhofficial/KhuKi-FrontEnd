@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 import 'ThirdViewModel.dart';
 import 'package:khukiting/src/config/configuartions.dart';
 class ThirdView extends StatelessWidget {
-   ThirdView({Key? key}) : super(key: key);
+  final bool isNew;
+   ThirdView({Key? key,required this.isNew}) : super(key: key);
     final UserRepository _userRepository = getIt<UserRepository>();
   @override
   Widget build(BuildContext context) {
@@ -25,13 +26,14 @@ class ThirdView extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
                         children: [
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
-                            child: StepProgressBar(currentStep: 3),
-                          ),
+                          if (isNew)
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
+                              child: StepProgressBar(currentStep: 3),
+                            ),
                           Container(
                             margin: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height * 0.1),
+                                top: MediaQuery.of(context).size.height * (isNew ? 0.1 : 0.2)),
                           ),
                           Stack(
                             alignment: Alignment.topCenter,

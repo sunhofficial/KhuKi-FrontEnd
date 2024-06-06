@@ -78,12 +78,12 @@ class LoginView extends StatelessWidget {
               MaterialPageRoute(builder: (context) => SecondView())
             );
       } 
-      else if (message == "쿠키생성") {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ThirdView())
-            );
-      } 
+      // else if (message == "쿠키생성") {
+      //       Navigator.push(
+      //         context,
+      //         MaterialPageRoute(builder: (context) => ThirdView())
+      //       );
+      // } 
       else if (message == "로그인성공") {
      Navigator.push(
               context,
