@@ -22,6 +22,8 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double imageSize = screenWidth - 16; 
     return Scaffold(
       backgroundColor: ColorStyles.LoginPageBackground,
       body: Center(
@@ -33,34 +35,38 @@ class LoginView extends StatelessWidget {
             ),
             Image.asset(
               "assets/logo.png",
-              width: 384,
-              height: 360,
+              width: imageSize,
+              height: imageSize,
             ),
             const SizedBox(
               height: 64,
             ),
             const Text(
               "쿠키로 전하는 나의 마음",
-              style: TextStyle(fontSize: 16, fontFamily: 'uhBeeBold'),
+              style: TextStyle(fontSize: 18, fontFamily: 'uhBeeBold', color: Colors.white),
             ),
+            const SizedBox(height: 8,),
             const Text(
               "Khu-Ki DDIng",
-              style: TextStyle(fontSize: 48),
+              style: TextStyle(fontSize: 48, color:  Colors.white),
             ),
             const SizedBox(
-              height: 80,
+              height: 72,
             ),
             // 여기에 추가적인 위젯이나 기능을 구현하세요
             const Text(
               "계속하려면 로그인 하세요",
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16,color: Colors.white),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(27, 16, 27, 64),
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
               child: SignInWithAppleButton(
                 onPressed: () async {
                   _handleSigninwithApple(context);
                 },
+                style: SignInWithAppleButtonStyle.white,
+                height: 56,
+                borderRadius: BorderRadius.circular(16),
               ),
             )
           ],

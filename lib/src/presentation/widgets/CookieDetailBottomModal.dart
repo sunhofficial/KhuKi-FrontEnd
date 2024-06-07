@@ -244,14 +244,14 @@ class CookieDetailBottomModal extends StatelessWidget {
                       "정문으로부터 거리",
                       Text("${cookie.distance}분",
                           style: const TextStyle(
-                              fontSize: 16, color: Colors.black))),
+                              fontSize: 16, color: Colors.black, fontFamily: 'cafeFonts'))),
                   const SizedBox(height: 32),
                   _InfoRow(
                       context,
                       "나의 맛집",
                       Text(cookie.restaurant,
                           style: const TextStyle(
-                              fontSize: 16, color: Colors.black))),
+                              fontSize: 16, color: Colors.black,fontFamily: 'cafeFonts'))),
                   const Spacer(),
                   if (cookie.cookieId != "picked")
                     _buildButtonsContainer(context, cookie),
