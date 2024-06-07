@@ -106,6 +106,20 @@ class RemoteServerDatasources {
       throw e;
     }
   }
+    Future<GeneralResponse<void>> putMyCookie(PostMyCookieRequest cookie) async {
+    try {
+      final response = await _dio.put(
+          apiEndPoint.baseUrl + apiEndPoint.user + "/myCookie",
+          data: cookie.toJson());
+      if (response.statusCode == 200) {
+        return GeneralResponse<void>.fromJson(response.data, (json) => null);
+      } else {
+        throw Exception("Failed to put second profile ${response.statusCode}");
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
 
   Future<GeneralResponse<GetCookiesResponse>> getAllCookies(int page) async {
     try {

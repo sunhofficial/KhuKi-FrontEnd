@@ -40,4 +40,14 @@ class ThirdViewModel extends ChangeNotifier {
       return false;
     }
   }
+  Future<bool> putCookie() async {
+    if (!isValidText) return false;
+    final response =
+        await _userRepository.putMyCookie(infoController.text, selectedCookie);
+    if (response.status == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

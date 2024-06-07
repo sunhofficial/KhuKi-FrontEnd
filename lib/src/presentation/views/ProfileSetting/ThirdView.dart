@@ -152,8 +152,7 @@ class ThirdView extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(15))),
                             onPressed: viewModel.isValidText
                                 ? () async {
-                                    bool isSuccess =
-                                        await viewModel.postCookie();
+                                    bool isSuccess = isNew ?  await viewModel.postCookie() : await viewModel.putCookie();
                                     if (isSuccess) {
                                       Navigator.push(
                                         context,
