@@ -33,7 +33,7 @@ class SecondViewModel extends ChangeNotifier {
   }
   Future<bool> submitProfile() async {
     if (isButtonDisabled) return false;
-    final response = await _userRepository.putSecondProfile( idController.text, messageController.text, restaurantController.text);
+    final response = await _userRepository.putSecondProfile( idController.text, restaurantController.text,messageController.text);
       if (response.status == 200) {
         print("성공");
         return true;

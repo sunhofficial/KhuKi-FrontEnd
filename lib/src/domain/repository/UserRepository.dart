@@ -36,6 +36,10 @@ class UserRepository {
     return await _remoteServices
         .postMyCookie(PostMyCookieRequest(info: info, type: type));
   }
+  Future<GeneralResponse<void>> putMyCookie(String info, int type) async {
+    return await _remoteServices
+        .putMyCookie(PostMyCookieRequest(info: info, type: type));
+  }
 
   Future<GeneralResponse<GetCookiesResponse>> getAllCookies(int page) async {
     return await _remoteServices.getAllCookies(page);

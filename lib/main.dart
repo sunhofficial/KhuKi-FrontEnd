@@ -18,11 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "khukiDDIng",
-
       theme: ThemeData(fontFamily: 'cafeFonts',scaffoldBackgroundColor: ColorStyles.Custombackground),
-      
-
-      
       home: LoginView(),
     );
   }

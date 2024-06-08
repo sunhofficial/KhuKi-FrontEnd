@@ -142,7 +142,7 @@ class _MainViewState extends State<MainView> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ThirdView(
-                              isNew: false,
+                              isNew: true,
                             )),
                   );
                 },
